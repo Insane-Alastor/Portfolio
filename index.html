@@ -1,1232 +1,912 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Paul Shaji - Portfolio</title>
-    <!-- Fonts: Plus Jakarta Sans & Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-base: #030308;
-            --bg-deep: #060714;
-            --accent-purple: #9d4edd;
-            --accent-purple-glow: rgba(157, 78, 221, 0.45);
-            --accent-blue: #2563eb;
-            --accent-blue-glow: rgba(37, 99, 235, 0.45);
-            --neon-violet: #c77dff;
-            --liquid-glass: rgba(13, 16, 35, 0.55);
-            --liquid-glass-border: rgba(157, 78, 221, 0.22);
-            --liquid-glass-hover: rgba(23, 27, 58, 0.7);
-            --text-heading: #ffffff;
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Paul Shaji | Portfolio</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Profile.png" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Devicon for Vector Tech Logos -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none;
-        }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.7;
-            position: relative;
-        }
-
-        /* Custom Glowing Cursor (Purple/Blue Glow) */
-        .cursor-dot {
-            width: 7px;
-            height: 7px;
-            background: #ffffff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: 0 0 10px #c77dff, 0 0 20px #9d4edd;
-            transform: translate(-50%, -50%);
-        }
-
-        .cursor-follower {
-            width: 38px;
-            height: 38px;
-            background: radial-gradient(circle, rgba(157, 78, 221, 0.25) 0%, rgba(37, 99, 235, 0.08) 60%, transparent 100%);
-            border: 1px solid rgba(199, 125, 255, 0.5);
-            position: fixed;
-            top: 0;
-            left: 0;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px rgba(157, 78, 221, 0.3), inset 0 0 10px rgba(37, 99, 235, 0.2);
-            transition: transform 0.12s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
-        }
-
-        /* Moving Ambient Background (Dark Blue & Glowing Purple) */
-        .ambient-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-            background: radial-gradient(circle at 50% 50%, var(--bg-deep) 0%, var(--bg-base) 100%);
-        }
-
-        .ambient-layer::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 32px 32px;
-            opacity: 0.6;
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(130px);
-            opacity: 0.38;
-            animation: drift 22s infinite alternate ease-in-out;
-            transform-origin: center;
-        }
-
-        .blob-1 {
-            top: -10%;
-            left: 15%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, #7928ca 0%, #3b82f6 100%);
-            animation-duration: 22s;
-        }
-
-        .blob-2 {
-            bottom: -15%;
-            right: 10%;
-            width: 55vw;
-            height: 55vw;
-            background: radial-gradient(circle, #2563eb 0%, #9d4edd 100%);
-            opacity: 0.3;
-            animation-duration: 28s;
-            animation-delay: -6s;
-        }
-
-        .blob-3 {
-            top: 45%;
-            left: 35%;
-            width: 35vw;
-            height: 35vw;
-            background: #5b21b6;
-            opacity: 0.25;
-            animation-duration: 18s;
-            animation-delay: -10s;
-        }
-
-        @keyframes drift {
-            0% {
-                transform: translate(0, 0) scale(1);
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Fira Code"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              dark: '#05070d',
+              surface: '#0d121f',
+              border: '#1b2438'
             }
-            50% {
-                transform: translate(8vw, 6vh) scale(1.1);
-            }
-            100% {
-                transform: translate(-6vw, 12vh) scale(0.92);
-            }
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            color: var(--text-heading);
-            letter-spacing: -0.03em;
-        }
-
-        .section-header {
-            margin-bottom: 2.8rem;
-        }
-
-        .section-tag {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--neon-violet);
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            display: inline-block;
-        }
-
-        h2 {
-            font-size: 2.3rem;
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2 .gradient-text {
-            background: linear-gradient(135deg, #ffffff 0%, var(--neon-violet) 60%, var(--accent-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.75;
-        }
-
-        /* Fluid Liquid Glass Card */
-        .liquid-glass {
-            background: var(--liquid-glass);
-            backdrop-filter: blur(20px) saturate(190%);
-            -webkit-backdrop-filter: blur(20px) saturate(190%);
-            border: 1px solid var(--liquid-glass-border);
-            border-top: 1px solid rgba(199, 125, 255, 0.4);
-            border-radius: 20px;
-            box-shadow:
-                0 16px 36px -10px rgba(0, 0, 0, 0.65),
-                0 0 20px -5px rgba(157, 78, 221, 0.1),
-                inset 0 1px 1px rgba(255, 255, 255, 0.15);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .liquid-glass:hover {
-            background: var(--liquid-glass-hover);
-            border-color: rgba(199, 125, 255, 0.45);
-            border-top-color: rgba(255, 255, 255, 0.8);
-            transform: translateY(-4px);
-            box-shadow:
-                0 22px 45px -10px rgba(0, 0, 0, 0.8),
-                0 0 30px rgba(157, 78, 221, 0.25),
-                inset 0 1px 2px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Container Layout & Spacing */
-        .container {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 5.5rem 0;
-        }
-
-        /* Floating Nav: Right Dock on PC (No Contact Icon), Top on Mobile */
-        .floating-nav {
-            position: fixed;
-            right: 2.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-            padding: 1rem 0.75rem;
-            background: rgba(10, 12, 28, 0.65);
-            backdrop-filter: blur(25px) saturate(200%);
-            -webkit-backdrop-filter: blur(25px) saturate(200%);
-            border: 1px solid var(--liquid-glass-border);
-            border-top: 1px solid rgba(199, 125, 255, 0.4);
-            border-radius: 35px;
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.7),
-                0 0 25px rgba(157, 78, 221, 0.15),
-                inset 0 1px 1px rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-item {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .nav-item i {
-            font-size: 1.05rem;
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            color: #ffffff;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-            box-shadow: 0 0 20px var(--accent-purple-glow);
-            transform: scale(1.1);
-        }
-
-        .nav-tooltip {
-            position: absolute;
-            right: 58px;
-            background: rgba(8, 10, 24, 0.95);
-            border: 1px solid var(--liquid-glass-border);
-            backdrop-filter: blur(12px);
-            color: #ffffff;
-            padding: 0.35rem 0.85rem;
-            border-radius: 8px;
-            font-size: 0.78rem;
-            font-weight: 500;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(8px);
-            transition: all 0.25s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-        }
-
-        .nav-item:hover .nav-tooltip {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Hero Section */
-        #home {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 4rem 0 2rem;
-            position: relative;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.25fr 0.75fr;
-            gap: 3.5rem;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.4rem 1rem;
-            background: rgba(157, 78, 221, 0.12);
-            border: 1px solid rgba(157, 78, 221, 0.3);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--neon-violet);
-            margin-bottom: 1.2rem;
-        }
-
-        .hero-badge .pulse-dot {
-            width: 7px;
-            height: 7px;
-            background: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
-        }
-
-        .hero-text h1 {
-            font-size: 4.2rem;
-            line-height: 1.1;
-            margin-bottom: 1.2rem;
-            font-weight: 800;
-        }
-
-        .glow-text {
-            background: linear-gradient(135deg, #ffffff 30%, var(--neon-violet) 75%, var(--accent-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 35px rgba(157, 78, 221, 0.4);
-        }
-
-        .hero-text .tagline {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-            max-width: 540px;
-        }
-
-        .location {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .location i {
-            color: var(--neon-violet);
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image-wrapper {
-            position: relative;
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-glow-ring {
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, var(--accent-blue), var(--accent-purple), transparent 60%);
-            animation: spin 8s linear infinite;
-            filter: blur(14px);
-            opacity: 0.8;
-            z-index: 0;
-        }
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(199, 125, 255, 0.35);
-            z-index: 1;
-            background: rgba(13, 16, 35, 0.6);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-            transition: transform 0.15s ease-out;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 0.75rem 1.6rem;
-            border-radius: 12px;
-            font-size: 0.92rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 25px var(--accent-purple-glow);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 0 35px rgba(157, 78, 221, 0.7);
-            transform: translateY(-2px);
-            color: #ffffff;
-        }
-
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-primary);
-            border: 1px solid var(--liquid-glass-border);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-outline:hover {
-            background: rgba(157, 78, 221, 0.15);
-            border-color: var(--neon-violet);
-            color: #ffffff;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 0.6rem 1.2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border: 1px dashed rgba(157, 78, 221, 0.25);
-        }
-
-        /* About Section */
-        .about-box {
-            padding: 2.8rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-box p {
-            font-size: 1.15rem;
-            line-height: 1.85;
-            color: var(--text-primary);
-        }
-
-        /* 2-Column Grid Layout */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        /* Card Interiors */
-        .card-inner {
-            padding: 2.2rem;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 1.4rem;
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(37, 99, 235, 0.2));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--neon-violet);
-            font-size: 1.25rem;
-            border: 1px solid rgba(199, 125, 255, 0.3);
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.2);
-        }
-
-        .card-title h3 {
-            font-size: 1.35rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .card-subtitle {
-            font-size: 0.88rem;
-            color: var(--neon-violet);
-            font-weight: 500;
-        }
-
-        .card-meta {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .card-meta i {
-            color: var(--neon-violet);
-            font-size: 0.85rem;
-        }
-
-        /* Skills */
-        .skills-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 1.6rem;
-        }
-
-        .skill-group h4 {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .pill-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-        }
-
-        .pill {
-            background: rgba(13, 16, 35, 0.6);
-            border: 1px solid var(--liquid-glass-border);
-            padding: 0.55rem 1.1rem;
-            border-radius: 12px;
-            font-size: 0.88rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-primary);
-            transition: all 0.25s ease;
-        }
-
-        .pill i {
-            color: var(--neon-violet);
-        }
-
-        .pill:hover {
-            background: rgba(157, 78, 221, 0.2);
-            border-color: var(--neon-violet);
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px var(--accent-purple-glow);
-        }
-
-        /* Projects Section */
-        .project-links {
-            margin-top: auto;
-            padding-top: 1.8rem;
-            display: flex;
-            gap: 0.9rem;
-            flex-wrap: wrap;
-        }
-
-        /* Timeline (Experience & Extracurricular) */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 6px;
-            bottom: 6px;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent-purple), var(--accent-blue), transparent);
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.35rem;
-            top: 0.35rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--neon-violet);
-            box-shadow: 0 0 12px var(--neon-violet);
-            border: 2px solid var(--bg-base);
-        }
-
-        .timeline-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
-
-        .timeline-subtitle {
-            font-size: 0.9rem;
-            color: var(--neon-violet);
-            margin-bottom: 0.4rem;
-        }
-
-        /* Clean Achievements & Certifications (No Glass Box) */
-        .clean-achievements-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .achievement-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(157, 78, 221, 0.15);
-            transition: transform 0.25s ease;
-        }
-
-        .achievement-row:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .achievement-row:hover {
-            transform: translateX(6px);
-        }
-
-        .achievement-icon-clean {
-            font-size: 1.4rem;
-            color: var(--neon-violet);
-            margin-top: 0.2rem;
-            filter: drop-shadow(0 0 10px var(--accent-purple-glow));
-        }
-
-        .achievement-info h4 {
-            font-size: 1.15rem;
-            color: #ffffff;
-            margin-bottom: 0.2rem;
-        }
-
-        .achievement-issuer {
-            font-size: 0.88rem;
-            color: var(--neon-violet);
-            font-weight: 500;
-            margin-bottom: 0.3rem;
-        }
-
-        .achievement-date {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-        }
-
-        .verify-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: color 0.2s ease, text-shadow 0.2s ease;
-        }
-
-        .verify-link:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px var(--neon-violet);
-        }
-
-        /* Footer */
-        footer {
-            padding: 4.5rem 0 3rem;
-            text-align: center;
-            border-top: 1px solid rgba(157, 78, 221, 0.15);
-            margin-top: 3rem;
-            position: relative;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            margin-bottom: 1.8rem;
-        }
-
-        .social-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .social-btn:hover {
-            color: #ffffff;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-            box-shadow: 0 0 20px var(--accent-purple-glow);
-        }
-
-        .copyright {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Scroll Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 992px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2.5rem;
-            }
-
-            .location, .hero-cta-group {
-                justify-content: center;
-            }
-
-            .hero-text h1 {
-                font-size: 3.2rem;
-            }
-
-            .hero-text .tagline {
-                margin: 0 auto 1.5rem auto;
-            }
-
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            * {
-                cursor: auto;
-            }
-
-            .cursor-dot, .cursor-follower {
-                display: none;
-            }
-
-            /* Floating Dock on Mobile: Top Floating Pill */
-            .floating-nav {
-                top: 1rem;
-                bottom: auto;
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
-                flex-direction: row;
-                gap: 0.75rem;
-                padding: 0.5rem 0.9rem;
-                border-radius: 40px;
-                width: max-content;
-            }
-
-            .nav-item {
-                width: 38px;
-                height: 38px;
-            }
-
-            .nav-tooltip {
-                display: none;
-            }
-
-            #home {
-                padding-top: 6.5rem;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-image-wrapper {
-                width: 240px;
-                height: 240px;
-            }
-
-            .about-box, .card-inner {
-                padding: 1.8rem;
-            }
-        }
-    </style>
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #05070d;
+      color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Hide OS Cursor on Desktop */
+    @media (pointer: fine) {
+      body, a, button, input {
+        cursor: none !important;
+      }
+    }
+    @media (pointer: coarse) {
+      #cursor-dot, #cursor-circle {
+        display: none !important;
+      }
+    }
+
+    /* White Center Dot */
+    #cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate3d(-50%, -50%, 0);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.95);
+      transition: opacity 0.2s ease;
+      will-change: transform;
+    }
+
+    /* Glass Blur Follower Circle */
+    #cursor-circle {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 
+        0 0 16px rgba(255, 255, 255, 0.12),
+        inset 0 0 10px rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate3d(-50%, -50%, 0);
+      will-change: transform, width, height, border-color;
+      transition: 
+        width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.25s ease,
+        background-color 0.25s ease,
+        opacity 0.2s ease;
+    }
+
+    /* Cursor Hover State */
+    .cursor-active #cursor-circle {
+      width: 54px;
+      height: 54px;
+      border-color: rgba(129, 140, 248, 0.7);
+      background: rgba(99, 102, 241, 0.12);
+      box-shadow: 
+        0 0 22px rgba(99, 102, 241, 0.35),
+        inset 0 0 12px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Ambient Cyber-Grid Background */
+    .bg-grid-pattern {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 55px 55px;
+      pointer-events: none;
+      z-index: 1;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+    }
+
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* Floating Navigation Bar */
+    .glass-nav {
+      background: rgba(13, 18, 31, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* Active Nav Link Blurred Glow */
+    .nav-active {
+      color: #ffffff !important;
+      background: rgba(99, 102, 241, 0.28) !important;
+      border: 1px solid rgba(129, 140, 248, 0.55) !important;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.65), inset 0 0 8px rgba(99, 102, 241, 0.35) !important;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Glowing Glass Cards */
+    .glass-card {
+      background: rgba(13, 18, 31, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.55),
+        0 0 20px -3px rgba(99, 102, 241, 0.15);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(129, 140, 248, 0.8);
+      transform: translateY(-5px);
+      box-shadow: 
+        0 20px 45px -10px rgba(0, 0, 0, 0.85),
+        0 0 35px 6px rgba(99, 102, 241, 0.5),
+        inset 0 0 25px rgba(99, 102, 241, 0.2);
+    }
+
+    /* High-DPI Sharp Image Rendering */
+    .crisp-img {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
+
+    /* ================= SOCIAL ICONS HOVER GLOW ================= */
+    .social-icon-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(13, 18, 31, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 1.25rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .social-icon-btn:hover {
+      transform: translateY(-4px) scale(1.1);
+    }
+
+    .social-icon-btn.btn-github:hover {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.2);
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+    }
+
+    .social-icon-btn.btn-linkedin:hover {
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.7);
+      box-shadow: 0 0 25px rgba(14, 165, 233, 0.55), inset 0 0 10px rgba(14, 165, 233, 0.25);
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.9));
+    }
+
+    .social-icon-btn.btn-discord:hover {
+      color: #818cf8;
+      border-color: rgba(129, 140, 248, 0.8);
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.6), inset 0 0 10px rgba(99, 102, 241, 0.3);
+      filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.9));
+    }
+
+    .social-icon-btn.btn-mulearn:hover {
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.8);
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6), inset 0 0 10px rgba(245, 158, 11, 0.3);
+      filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.9));
+    }
+
+    .social-icon-btn.btn-anilist:hover {
+      color: #02a9ff;
+      border-color: rgba(2, 169, 255, 0.8);
+      box-shadow: 0 0 25px rgba(2, 169, 255, 0.6), inset 0 0 10px rgba(2, 169, 255, 0.3);
+      filter: drop-shadow(0 0 8px rgba(2, 169, 255, 0.9));
+    }
+  </style>
 </head>
+<body class="selection:bg-indigo-500 selection:text-white">
 
-<body>
+  <!-- ================= CANVAS BACKGROUND ANIMATION ================= -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-grid-pattern"></div>
 
-    <!-- Glowing Custom Cursor -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-follower" id="cursor-follower"></div>
+  <!-- ================= GLASS BLUR CURSOR ================= -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-circle"></div>
 
-    <!-- Moving Dark Blue & Glowing Purple Background -->
-    <div class="ambient-layer">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+  <!-- ================= FLOATING NAVIGATION BAR ================= -->
+  <header class="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
+    <nav class="glass-nav rounded-full px-5 py-2 w-full max-w-3xl flex items-center justify-between">
+      
+      <!-- Desktop Navigation Links -->
+      <div class="hidden md:flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-slate-400">
+        <a href="#hero" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Home</a>
+        <a href="#about" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">About</a>
+        <a href="#education" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Education</a>
+        <a href="#skills" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Skills</a>
+        <a href="#projects" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Projects</a>
+        <a href="#achievements" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Achievements</a>
+      </div>
+
+      <!-- Mobile Label -->
+      <div class="md:hidden text-xs font-mono text-indigo-400 font-semibold tracking-wider">
+        PORTFOLIO
+      </div>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="flex items-center gap-2">
+        <a href="#contact" class="hidden sm:inline-flex px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-indigo-600/30">
+          Connect
+        </a>
+        <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white p-2 text-base" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobile-menu" class="fixed top-20 inset-x-4 z-40 hidden md:hidden">
+    <div class="glass-nav rounded-2xl p-5 flex flex-col gap-3 text-center text-sm font-medium text-slate-200 shadow-2xl border border-slate-800">
+      <a href="#hero" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Home</a>
+      <a href="#about" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">About</a>
+      <a href="#education" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Education</a>
+      <a href="#skills" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Skills</a>
+      <a href="#projects" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Projects</a>
+      <a href="#achievements" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Achievements</a>
+      <a href="#contact" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg font-semibold text-indigo-400">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section id="hero" class="min-h-screen relative flex items-center justify-center pt-32 pb-20 px-6 z-10">
+    <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+      
+      <!-- Crisp Profile Container -->
+      <div class="relative mb-6">
+        <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 shadow-2xl shadow-indigo-500/35">
+          <div class="w-full h-full rounded-full overflow-hidden bg-slate-900">
+            <img 
+              src="Profile.png" 
+              alt="John Paul Shaji" 
+              class="w-full h-full object-cover object-center crisp-img transition-transform duration-300 hover:scale-105"
+              onerror="this.src='https://ui-avatars.com/api/?name=John+Paul+Shaji&background=4f46e5&color=fff&size=256'"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Tagline Badge -->
+      <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 text-xs font-mono mb-5 shadow-inner">
+        First-Year Computer Science Student
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4">
+        Hi, I'm <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">John Paul Shaji</span>
+      </h1>
+
+      <p class="text-sm font-mono text-indigo-400/90 mb-4 tracking-wide">
+        &lt;Insane_Alastor /&gt;
+      </p>
+
+      <p class="text-base sm:text-lg text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed font-normal">
+        Computer Science Student | Building Cool Applications. Tinkering with code and exploring modern technology.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap justify-center items-center gap-4 mb-9">
+        <a href="#projects" class="px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+          <i class="fa-solid fa-code text-xs"></i> View Projects
+        </a>
+        <a href="#contact" class="px-6 py-3 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 text-sm font-semibold transition-all flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-xs"></i> Contact Me
+        </a>
+      </div>
+
+      <!-- Social Links with Glowing Hover Effects -->
+      <div class="flex justify-center items-center gap-4">
+        <a href="https://github.com/Insane-Alastor" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-icon-btn btn-github">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/john-paul-shaji-b62284431" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="social-icon-btn btn-linkedin">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="https://discord.com/users/1245912407579295765" target="_blank" rel="noopener noreferrer" title="Discord" class="social-icon-btn btn-discord">
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <a href="https://app.mulearn.org/profile/johnpaulshaji@mulearn" target="_blank" rel="noopener noreferrer" title="MuLearn" class="social-icon-btn btn-mulearn">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </a>
+        <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" title="AniList" class="social-icon-btn btn-anilist">
+          <i class="fa-solid fa-tv"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ABOUT SECTION ================= -->
+  <section id="about" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+    <div class="flex items-center gap-3 mb-10">
+      <span class="text-indigo-400 font-mono text-sm font-semibold">01.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">About Me</h2>
+      <div class="h-px bg-slate-800 flex-1 ml-4"></div>
     </div>
 
-    <!-- Floating Navigation Dock (Right on PC, Top on Mobile - Without Contact Button) -->
-    <nav class="floating-nav">
-        <a href="#home" class="nav-item active" aria-label="Home">
-            <i class="fa-solid fa-house"></i>
-            <span class="nav-tooltip">Home</span>
-        </a>
-        <a href="#about" class="nav-item" aria-label="About">
-            <i class="fa-solid fa-user"></i>
-            <span class="nav-tooltip">About</span>
-        </a>
-        <a href="#education" class="nav-item" aria-label="Education & Skills">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span class="nav-tooltip">Education & Skills</span>
-        </a>
-        <a href="#projects" class="nav-item" aria-label="Projects">
-            <i class="fa-solid fa-code-fork"></i>
-            <span class="nav-tooltip">Projects</span>
-        </a>
-        <a href="#experience" class="nav-item" aria-label="Experience">
-            <i class="fa-solid fa-briefcase"></i>
-            <span class="nav-tooltip">Experience</span>
-        </a>
-    </nav>
-
-    <!-- Hero Section -->
-    <header id="home">
-        <div class="container hero-grid">
-            <div class="hero-text reveal">
-                <div class="hero-badge">
-                    <span class="pulse-dot"></span> Available for Projects & Collabs
-                </div>
-                <h1>Hi, I'm <span class="glow-text">John Paul</span></h1>
-                <p class="tagline">Computer Science Student passionate about engineering sleek applications and interactive systems.</p>
-
-                <div class="location">
-                    <i class="fa-solid fa-location-dot"></i> Kochi, Kerala, India
-                </div>
-
-                <div class="hero-cta-group">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fa-solid fa-arrow-down"></i> Explore Work
-                    </a>
-                    <a href="#about" class="btn btn-outline">
-                        More About Me
-                    </a>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl">
+        <p class="text-slate-300 leading-relaxed text-base sm:text-lg mb-6 font-normal">
+          I’m a first-year Computer Science student with a strong passion for tinkering with code and exploring new technology. I chose Computer Science to dive deep into the field, grow as a developer, and ultimately build tools that make a positive difference today and in the future.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono text-slate-400">
+          <div class="flex items-center gap-2.5">
+            <div class="w-7 h-7 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+              <i class="fa-solid fa-location-dot"></i>
             </div>
-
-            <div class="hero-visual reveal">
-                <div class="hero-image-wrapper" id="parallax-wrapper">
-                    <div class="hero-glow-ring"></div>
-                    <img src="Profile.png" alt="John Paul Shaji" class="hero-image" id="parallax-img">
-                </div>
+            Ernakulam, Kerala, India
+          </div>
+          <div class="flex items-center gap-2.5">
+            <div class="w-7 h-7 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+              <i class="fa-solid fa-code-branch"></i>
             </div>
+            Open for Collabs &amp; Projects
+          </div>
         </div>
-    </header>
+      </div>
 
-    <main>
-        <!-- About Section -->
-        <section id="about">
-            <div class="container reveal">
-                <div class="section-header">
-                    <span class="section-tag">Introduction</span>
-                    <h2><span class="gradient-text">About Me</span></h2>
-                </div>
-                <div class="liquid-glass about-box">
-                    <p>I'm a first-year computer science student who loves tinkering with coding and building applications.
-                    When I'm not soldering something, I'm usually sketching UI designs for apps I'll probably never finish.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education & Skills -->
-        <section id="education">
-            <div class="container">
-                <div class="grid-2">
-                    <!-- Education -->
-                    <div class="reveal">
-                        <div class="section-header">
-                            <span class="section-tag">Academic Background</span>
-                            <h2><span class="gradient-text">Education</span></h2>
-                        </div>
-                        <div class="liquid-glass card-inner">
-                            <div class="card-header">
-                                <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                                <div class="card-title">
-                                    <h3>VJCET</h3>
-                                    <div class="card-subtitle">B.Tech in Computer Science Engineering</div>
-                                </div>
-                            </div>
-                            <p class="card-meta"><i class="fa-regular fa-calendar"></i> Batch: 2026–2030</p>
-                            <p class="card-meta"><i class="fa-solid fa-award"></i> CGPA: 96%</p>
-                        </div>
-                    </div>
-
-                    <!-- Skills -->
-                    <div class="reveal" id="skills">
-                        <div class="section-header">
-                            <span class="section-tag">Capabilities</span>
-                            <h2><span class="gradient-text">Skills</span></h2>
-                        </div>
-                        <div class="liquid-glass card-inner skills-wrapper">
-                            <div class="skill-group">
-                                <h4>Technical</h4>
-                                <div class="pill-container">
-                                    <span class="pill"><i class="fa-brands fa-python"></i> Python</span>
-                                </div>
-                            </div>
-                            <div class="skill-group">
-                                <h4>Soft Skills</h4>
-                                <div class="pill-container">
-                                    <span class="pill"><i class="fa-solid fa-pen-nib"></i> Sketching</span>
-                                    <span class="pill"><i class="fa-solid fa-book-open"></i> Storytelling</span>
-                                    <span class="pill"><i class="fa-regular fa-clock"></i> Time management</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <div class="container reveal">
-                <div class="section-header">
-                    <span class="section-tag">Showcase</span>
-                    <h2><span class="gradient-text">Featured Projects</span></h2>
-                </div>
-                <div class="grid-2">
-                    <!-- Project 1 -->
-                    <div class="liquid-glass card-inner">
-                        <div class="card-header">
-                            <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
-                            <div class="card-title">
-                                <h3>Line-Following Delivery Bot</h3>
-                                <div class="card-subtitle">Arduino, IR Sensors, C</div>
-                            </div>
-                        </div>
-                        <p>A small robot that follows a taped path to deliver snacks around the hostel corridor, built for a departmental fest.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/Insane-Alastor" target="_blank" class="btn btn-outline">
-                                <i class="fa-brands fa-github"></i> GitHub
-                            </a>
-                            <span class="badge"><i class="fa-solid fa-ban"></i> Physical Build</span>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="liquid-glass card-inner">
-                        <div class="card-header">
-                            <div class="card-icon"><i class="fa-brands fa-figma"></i></div>
-                            <div class="card-title">
-                                <h3>Minimalist Recipe App UI</h3>
-                                <div class="card-subtitle">Figma Design</div>
-                            </div>
-                        </div>
-                        <p>A UI/UX case study redesigning a cluttered recipe app into a clean, minimal browsing experience.</p>
-                        <div class="project-links">
-                            <a href="https://guns.lol/insane_alastor" target="_blank" class="btn btn-primary">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience & Achievements -->
-        <section id="experience">
-            <div class="container">
-                <div class="grid-2">
-                    <!-- Experience & Extracurricular -->
-                    <div>
-                        <div class="reveal">
-                            <div class="section-header">
-                                <span class="section-tag">Career & Roles</span>
-                                <h2><span class="gradient-text">Experience</span></h2>
-                            </div>
-                            <div class="timeline">
-                                <div class="timeline-item">
-                                    <div class="timeline-title">GreenDay Applications Club</div>
-                                    <div class="timeline-subtitle">Volunteer, Software Team</div>
-                                    <p class="card-meta"><i class="fa-regular fa-calendar"></i> August 2026 – Present</p>
-                                    <p>Assist senior members with coding and testing web applications for inter-college competitions.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="reveal" style="margin-top: 3.5rem;">
-                            <div class="section-header">
-                                <span class="section-tag">Activities</span>
-                                <h2><span class="gradient-text">Extracurricular</span></h2>
-                            </div>
-                            <div class="timeline">
-                                <div class="timeline-item">
-                                    <div class="timeline-title">College Cultural Fest Committee</div>
-                                    <div class="timeline-subtitle">Volunteer</div>
-                                    <p>Helped design posters and manage the sign-up desk for a 2-day inter-college cultural fest.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Achievements & Certifications (Clean List, No Glass Box) -->
-                    <div class="reveal" id="achievements">
-                        <div class="section-header">
-                            <span class="section-tag">Recognition</span>
-                            <h2><span class="gradient-text">Achievements & Certs</span></h2>
-                        </div>
-
-                        <div class="clean-achievements-list">
-                            <div class="achievement-row">
-                                <div class="achievement-icon-clean">
-                                    <i class="fa-solid fa-trophy"></i>
-                                </div>
-                                <div class="achievement-info">
-                                    <h4>2nd Place – Coding Breaker Fest</h4>
-                                    <div class="achievement-issuer">VJCET</div>
-                                    <div class="achievement-date"><i class="fa-regular fa-calendar"></i> April 2026</div>
-                                    <p>Competed across timed algorithmic and system logic debugging rounds.</p>
-                                </div>
-                            </div>
-
-                            <div class="achievement-row">
-                                <div class="achievement-icon-clean">
-                                    <i class="fa-solid fa-certificate"></i>
-                                </div>
-                                <div class="achievement-info">
-                                    <h4>Python Code Clashing</h4>
-                                    <div class="achievement-issuer">CodinGame</div>
-                                    <div class="achievement-date"><i class="fa-regular fa-calendar"></i> December 2025</div>
-                                    <a href="https://www.codingame.com/certification/5VTLPgGAD6Ypl9XX9r4JZw" target="_blank" class="verify-link">
-                                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer & Direct Contact -->
-    <footer>
-        <div class="container reveal">
-            <div class="social-links">
-                <a href="https://github.com/Insane-Alastor" target="_blank" class="liquid-glass social-btn" aria-label="GitHub">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-                <a href="mailto:insanealastor1@gmail.com" class="liquid-glass social-btn" aria-label="Email">
-                    <i class="fa-solid fa-envelope"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/john-paul-shaji-b62284431/" target="_blank" class="liquid-glass social-btn" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </a>
-            </div>
-
-            <div class="copyright">
-                &copy; <span id="year"></span> John Paul Shaji. Designed in dark liquid glass & glowing violet.
-            </div>
+      <div class="glass-card p-6 rounded-3xl flex flex-col justify-center items-center text-center">
+        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-2xl mb-4">
+          <i class="fa-solid fa-terminal"></i>
         </div>
-    </footer>
+        <h3 class="font-semibold text-white mb-1">Passionate Learner</h3>
+        <p class="text-xs text-slate-400">Tinkering with code, studying system design, and building modern apps.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Scripts -->
-    <script>
-        // Dynamic Year
-        document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- ================= EDUCATION SECTION ================= -->
+  <section id="education" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+    <div class="flex items-center gap-3 mb-10">
+      <span class="text-indigo-400 font-mono text-sm font-semibold">02.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">Education</h2>
+      <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+    </div>
 
-        // Custom Glowing Mouse Tracking
-        const dot = document.getElementById('cursor-dot');
-        const follower = document.getElementById('cursor-follower');
+    <div class="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+        <div>
+          <h3 class="text-xl font-bold text-white">B.Tech in Computer Science Engineering</h3>
+          <a href="https://vjcet.org/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 text-sm hover:underline flex items-center gap-1.5 mt-1 font-medium">
+            Viswajyothi College of Engineering and Technology (VJCET) <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+        <span class="text-xs font-mono px-3 py-1 rounded-full bg-slate-800/80 text-indigo-300 border border-indigo-500/30">
+          2026 – 2030 Batch
+        </span>
+      </div>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        Building solid foundations in software engineering principles, algorithms, and database systems.
+      </p>
+      <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-500">
+        <a href="https://maps.app.goo.gl/zLcvV6Gxde2zaJts8" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-map-pin text-indigo-400"></i> Campus Location
+        </a>
+        <span>CGPA: Looking forward to it ;)</span>
+      </div>
+    </div>
+  </section>
 
-        let mouseX = 0, mouseY = 0;
-        let followerX = 0, followerY = 0;
+  <!-- ================= SKILLS SECTION ================= -->
+  <section id="skills" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+    <div class="flex items-center gap-3 mb-10">
+      <span class="text-indigo-400 font-mono text-sm font-semibold">03.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">Skills &amp; Interests</h2>
+      <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+    </div>
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            dot.style.left = `${mouseX}px`;
-            dot.style.top = `${mouseY}px`;
-        });
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Tech Stack: Strictly Python, HTML, MySQL -->
+      <div class="glass-card p-6 rounded-3xl">
+        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold block mb-4">Technical Stack</span>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
+            <i class="devicon-python-plain colored text-2xl"></i>
+            <div>
+              <h4 class="text-xs font-semibold text-white">Python</h4>
+              <p class="text-[11px] text-slate-400">Core Programming</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
+            <i class="devicon-html5-plain colored text-2xl"></i>
+            <div>
+              <h4 class="text-xs font-semibold text-white">HTML</h4>
+              <p class="text-[11px] text-slate-400">Frontend Structure</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
+            <i class="devicon-mysql-original colored text-2xl"></i>
+            <div>
+              <h4 class="text-xs font-semibold text-white">MySQL</h4>
+              <p class="text-[11px] text-slate-400">Relational Databases</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        function animateFollower() {
-            followerX += (mouseX - followerX) * 0.18;
-            followerY += (mouseY - followerY) * 0.18;
-            follower.style.left = `${followerX}px`;
-            follower.style.top = `${followerY}px`;
-            requestAnimationFrame(animateFollower);
+      <!-- Soft Skills -->
+      <div class="glass-card p-6 rounded-3xl">
+        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold block mb-4">Soft Skills</span>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
+            <div class="w-8 h-8 rounded-lg bg-pink-500/10 text-pink-400 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-palette"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-semibold text-white">Sketching</h4>
+              <p class="text-[11px] text-slate-400">Visual thinker &amp; drawing</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
+            <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-semibold text-white">Tech Nerd</h4>
+              <p class="text-[11px] text-slate-400">Curious tech explorer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hobbies -->
+      <div class="glass-card p-6 rounded-3xl">
+        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold block mb-4">Hobbies</span>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-semibold text-white">Gaming</h4>
+              <p class="text-[11px] text-slate-400">Tactical &amp; competitive</p>
+            </div>
+          </div>
+          <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/30 hover:border-indigo-400/50 transition-colors group">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm">
+                <i class="fa-solid fa-tv"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-semibold text-white group-hover:text-indigo-300">Watching Anime</h4>
+                <p class="text-[11px] text-slate-400 font-mono">AniList: InsaneAlastor</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-indigo-400 group-hover:translate-x-0.5 transition-transform mr-1"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS SECTION ================= -->
+  <section id="projects" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+    <div class="flex items-center justify-between gap-3 mb-10">
+      <div class="flex items-center gap-3 flex-1">
+        <span class="text-indigo-400 font-mono text-sm font-semibold">04.</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white">Projects</h2>
+        <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+      </div>
+      <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-indigo-400 hover:underline flex items-center gap-1.5">
+        GitHub Repositories <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </a>
+    </div>
+
+    <!-- Dynamic Repositories Grid -->
+    <div id="repos-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass-card p-6 rounded-3xl animate-pulse">
+        <div class="h-5 bg-slate-800 rounded w-1/2 mb-3"></div>
+        <div class="h-4 bg-slate-800 rounded w-3/4 mb-4"></div>
+        <div class="h-3 bg-slate-800 rounded w-1/4"></div>
+      </div>
+      <div class="glass-card p-6 rounded-3xl animate-pulse">
+        <div class="h-5 bg-slate-800 rounded w-1/2 mb-3"></div>
+        <div class="h-4 bg-slate-800 rounded w-3/4 mb-4"></div>
+        <div class="h-3 bg-slate-800 rounded w-1/4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ACHIEVEMENTS SECTION ================= -->
+  <section id="achievements" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+    <div class="flex items-center gap-3 mb-10">
+      <span class="text-indigo-400 font-mono text-sm font-semibold">05.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">Achievements &amp; Certifications</h2>
+      <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Achievement 1 -->
+      <div class="glass-card p-6 rounded-3xl flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xl flex-shrink-0">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div>
+          <span class="text-xs font-mono text-amber-400 font-semibold uppercase tracking-wider">1st Place</span>
+          <h3 class="text-base sm:text-lg font-bold text-white mt-1">STHITHA PRAGYA Fest: Mission Decrypt</h3>
+          <p class="text-xs text-slate-400 mt-1">B.M.M English Medium Senior Secondary School</p>
+          <span class="text-xs text-slate-500 font-mono mt-2 block">27 September 2025</span>
+        </div>
+      </div>
+
+      <!-- Certification 1 -->
+      <div class="glass-card p-6 rounded-3xl flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl flex-shrink-0">
+          <i class="fa-solid fa-certificate"></i>
+        </div>
+        <div>
+          <span class="text-xs font-mono text-indigo-400 font-semibold uppercase tracking-wider">Certification</span>
+          <h3 class="text-base sm:text-lg font-bold text-white mt-1">Python 3 Programming Languages</h3>
+          <p class="text-xs text-slate-400 mt-1">CodinGame</p>
+          <div class="flex items-center justify-between gap-4 mt-3">
+            <span class="text-xs text-slate-500 font-mono">30 December 2025</span>
+            <a href="https://www.codingame.com/certification/5VTLPgGAD6Ypl9XX9r4JZw" target="_blank" rel="noopener noreferrer" class="text-xs text-indigo-400 hover:underline flex items-center gap-1 font-mono font-medium">
+              Verify Credential <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CONTACT SECTION ================= -->
+  <section id="contact" class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10">
+    <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden">
+      <span class="text-indigo-400 font-mono text-xs uppercase tracking-widest font-semibold">06. What's Next?</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4">Let's Connect</h2>
+      <p class="text-slate-400 max-w-xl mx-auto mb-8 text-sm sm:text-base leading-relaxed">
+        Whether you want to discuss technology, collaborate on software projects, or just talk anime &amp; code, feel free to drop a message!
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4 text-xs sm:text-sm font-mono mb-8">
+        <a href="mailto:johnpaulshaji@gmail.com" class="px-5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-all shadow-md shadow-indigo-600/30 flex items-center gap-2">
+          <i class="fa-solid fa-envelope"></i> johnpaulshaji@gmail.com
+        </a>
+        <a href="mailto:insanealastor1@gmail.com" class="px-5 py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all flex items-center gap-2">
+          <i class="fa-solid fa-at"></i> insanealastor1@gmail.com
+        </a>
+        <a href="tel:+918075827421" class="px-5 py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all flex items-center gap-2">
+          <i class="fa-solid fa-phone"></i> +91 8075827421
+        </a>
+      </div>
+
+      <!-- Contact Social Links with Glowing Hover Effects -->
+      <div class="flex justify-center items-center gap-4">
+        <a href="https://github.com/Insane-Alastor" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-icon-btn btn-github">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/john-paul-shaji-b62284431" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="social-icon-btn btn-linkedin">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="https://discord.com/users/1245912407579295765" target="_blank" rel="noopener noreferrer" title="Discord" class="social-icon-btn btn-discord">
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <a href="https://app.mulearn.org/profile/johnpaulshaji@mulearn" target="_blank" rel="noopener noreferrer" title="MuLearn" class="social-icon-btn btn-mulearn">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </a>
+        <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" title="AniList" class="social-icon-btn btn-anilist">
+          <i class="fa-solid fa-tv"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-8 text-center text-xs font-mono text-slate-500 border-t border-slate-900 relative z-10">
+    <p>Crafted by John Paul Shaji &copy; <span id="current-year"></span></p>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // 1. Set Current Year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // 2. Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // 3. High-Performance White Dot + Glass Blur Circle Cursor
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorCircle = document.getElementById('cursor-circle');
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let circleX = -100;
+    let circleY = -100;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      // Direct, zero-lag position update for the white center dot
+      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      
+      // Make visible when cursor enters viewport
+      cursorDot.style.opacity = '1';
+      cursorCircle.style.opacity = '1';
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+      cursorDot.style.opacity = '0';
+      cursorCircle.style.opacity = '0';
+    });
+
+    // Snappy, smooth lerp physics for the surrounding glass-blur circle
+    function animateCursor() {
+      circleX += (mouseX - circleX) * 0.22;
+      circleY += (mouseY - circleY) * 0.22;
+      cursorCircle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(animateCursor);
+    }
+    requestAnimationFrame(animateCursor);
+
+    // Interactive Element Detection
+    const interactiveTargets = document.querySelectorAll('a, button, input');
+    interactiveTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+    });
+
+    // 4. Scroll-Spy Navigation Active Highlight with Blurred Glow
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function updateActiveNavbar() {
+      let current = 'hero';
+      const scrollPosition = window.pageYOffset + 240;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          current = section.getAttribute('id');
         }
-        animateFollower();
+      });
 
-        // Cursor scaling on hoverable elements
-        const interactiveElements = document.querySelectorAll('a, button, .liquid-glass, .pill');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                follower.style.width = '52px';
-                follower.style.height = '52px';
-                follower.style.borderColor = '#c77dff';
-            });
-            el.addEventListener('mouseleave', () => {
-                follower.style.width = '38px';
-                follower.style.height = '38px';
-                follower.style.borderColor = 'rgba(199, 125, 255, 0.5)';
-            });
-        });
+      navLinks.forEach(link => {
+        link.classList.remove('nav-active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('nav-active');
+        }
+      });
+    }
 
-        // Floating Dock Active State on Scroll
-        const sections = document.querySelectorAll('section, header');
-        const navItems = document.querySelectorAll('.floating-nav .nav-item');
+    window.addEventListener('scroll', updateActiveNavbar, { passive: true });
+    window.addEventListener('load', updateActiveNavbar);
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= (sectionTop - 250)) {
-                    current = section.getAttribute('id');
-                }
-            });
+    // 5. Interactive Particle Constellation Background
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
 
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('href').substring(1) === current) {
-                    item.classList.add('active');
-                }
-            });
-        });
+    let width, height;
+    let particles = [];
+    const particleCount = window.innerWidth < 768 ? 40 : 85;
+    const maxDistance = 120;
+    const mouseRadius = 140;
 
-        // Scroll Reveal Observer
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.12,
-            rootMargin: "0px 0px -40px 0px"
-        });
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-        revealElements.forEach(el => revealObserver.observe(el));
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.size = Math.random() * 2 + 1;
+        this.baseAlpha = Math.random() * 0.4 + 0.3;
+        this.alpha = this.baseAlpha;
+        this.color = Math.random() > 0.4 ? '#818cf8' : '#a855f7';
+      }
 
-        // Hero Image Subtle Parallax
-        const parallaxImg = document.getElementById('parallax-img');
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 35;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 35;
-                parallaxImg.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
-            }
-        });
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
 
-        document.addEventListener('mouseleave', () => {
-            parallaxImg.style.transform = `translate(0px, 0px)`;
-        });
-    </script>
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        const dx = this.x - mouseX;
+        const dy = this.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < mouseRadius) {
+          const force = (mouseRadius - dist) / mouseRadius;
+          const angle = Math.atan2(dy, dx);
+          this.x += Math.cos(angle) * force * 1.5;
+          this.y += Math.sin(angle) * force * 1.5;
+          this.alpha = 0.9;
+        } else {
+          this.alpha = this.baseAlpha;
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.alpha;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDistance) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            const lineAlpha = (1 - dist / maxDistance) * 0.22;
+            ctx.strokeStyle = `rgba(99, 102, 241, ${lineAlpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+    requestAnimationFrame(animateParticles);
+
+    // 6. Dynamic GitHub Repositories Fetch
+    async function fetchGitHubRepos() {
+      const username = 'Insane-Alastor';
+      const container = document.getElementById('repos-grid');
+      
+      try {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
+        if (!res.ok) throw new Error('Failed to fetch repositories');
+        const repos = await res.json();
+
+        if (repos.length === 0) {
+          container.innerHTML = `<div class="col-span-2 text-center text-slate-400 py-8">No public repositories found.</div>`;
+          return;
+        }
+
+        container.innerHTML = repos.map(repo => `
+          <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <i class="fa-regular fa-folder-closed text-indigo-400 text-2xl"></i>
+                <div class="flex items-center gap-3 text-slate-400">
+                  <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" title="View Source">
+                    <i class="fa-brands fa-github text-lg"></i>
+                  </a>
+                  ${repo.homepage ? `
+                    <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" title="Live Preview">
+                      <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                    </a>
+                  ` : ''}
+                </div>
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-white hover:text-indigo-400 transition-colors">
+                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
+              </h3>
+              <p class="text-slate-400 text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed font-normal">
+                ${repo.description || 'A software project crafted with code.'}
+              </p>
+            </div>
+            
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mt-6 pt-4 border-t border-slate-800">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                ${repo.language || 'Code'}
+              </span>
+              <span class="flex items-center gap-1">
+                <i class="fa-regular fa-star"></i> ${repo.stargazers_count}
+              </span>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        container.innerHTML = `
+          <div class="glass-card p-6 rounded-3xl col-span-2">
+            <div class="flex items-center justify-between mb-3">
+              <i class="fa-regular fa-folder-closed text-indigo-400 text-2xl"></i>
+              <a href="https://github.com/Insane-Alastor" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-white">Explore My GitHub Repositories</h3>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">Check out all source code, experiments, and ongoing projects directly on GitHub.</p>
+            <div class="mt-4">
+              <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-indigo-400 hover:underline">View All Repositories &rarr;</a>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    fetchGitHubRepos();
+  </script>
 </body>
-
 </html>
