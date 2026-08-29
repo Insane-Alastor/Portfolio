@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,12 +33,9 @@
           },
           colors: {
             brand: {
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              dark: '#05070d',
-              surface: '#0d121f',
-              border: '#1b2438'
+              teal: '#14b8a6',
+              sky: '#0ea5e9',
+              indigo: '#6366f1'
             }
           }
         }
@@ -47,12 +44,66 @@
   </script>
 
   <style>
+    /* ================= DUAL-THEME VARIABLES ================= */
+    :root {
+      /* Light Mode: Clean White + Muted Tela Green + Sky Blue */
+      --bg-color: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --grid-line: rgba(14, 165, 233, 0.05);
+      --glass-nav-bg: rgba(255, 255, 255, 0.85);
+      --glass-nav-border: rgba(14, 165, 233, 0.18);
+      --glass-card-bg: rgba(255, 255, 255, 0.78);
+      --glass-card-border: rgba(20, 184, 166, 0.22);
+      --card-shadow: 0 10px 30px -5px rgba(14, 165, 233, 0.08), 0 4px 6px -2px rgba(20, 184, 166, 0.04);
+      --card-hover-shadow: 0 20px 35px -5px rgba(14, 165, 233, 0.18), 0 0 25px rgba(20, 184, 166, 0.18);
+      --active-nav-bg: rgba(20, 184, 166, 0.14);
+      --active-nav-border: rgba(14, 165, 233, 0.55);
+      --active-nav-text: #0369a1;
+      --active-nav-glow: 0 0 16px rgba(14, 165, 233, 0.35), inset 0 0 8px rgba(20, 184, 166, 0.2);
+      --cursor-dot: #0284c7;
+      --cursor-border: rgba(14, 165, 233, 0.45);
+      --cursor-bg: rgba(20, 184, 166, 0.08);
+      --tile-bg: rgba(248, 250, 252, 0.85);
+      --tile-border: rgba(226, 232, 240, 0.9);
+      --badge-bg: rgba(240, 253, 250, 0.95);
+      --badge-border: rgba(153, 246, 228, 0.8);
+      --badge-text: #0f766e;
+    }
+
+    html.dark {
+      /* Dark Cyber Mode */
+      --bg-color: #05070d;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --grid-line: rgba(255, 255, 255, 0.025);
+      --glass-nav-bg: rgba(13, 18, 31, 0.82);
+      --glass-nav-border: rgba(255, 255, 255, 0.08);
+      --glass-card-bg: rgba(13, 18, 31, 0.72);
+      --glass-card-border: rgba(99, 102, 241, 0.2);
+      --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 20px -3px rgba(99, 102, 241, 0.15);
+      --card-hover-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.85), 0 0 35px 6px rgba(99, 102, 241, 0.5), inset 0 0 25px rgba(99, 102, 241, 0.2);
+      --active-nav-bg: rgba(99, 102, 241, 0.32);
+      --active-nav-border: rgba(129, 140, 248, 0.6);
+      --active-nav-text: #ffffff;
+      --active-nav-glow: 0 0 18px rgba(99, 102, 241, 0.7), inset 0 0 8px rgba(99, 102, 241, 0.35);
+      --cursor-dot: #ffffff;
+      --cursor-border: rgba(255, 255, 255, 0.35);
+      --cursor-bg: rgba(255, 255, 255, 0.05);
+      --tile-bg: rgba(15, 23, 42, 0.7);
+      --tile-border: rgba(30, 41, 59, 0.8);
+      --badge-bg: rgba(30, 27, 75, 0.6);
+      --badge-border: rgba(99, 102, 241, 0.3);
+      --badge-text: #a5b4fc;
+    }
+
     body {
-      background-color: #05070d;
-      color: #e2e8f0;
+      background-color: var(--bg-color);
+      color: var(--text-main);
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
       position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* Globally disable all link underlines */
@@ -60,13 +111,13 @@
       text-decoration: none !important;
     }
 
-    /* Ambient Cyber-Grid Background */
+    /* Ambient Cyber-Grid */
     .bg-grid-pattern {
       position: fixed;
       inset: 0;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
       background-size: 55px 55px;
       pointer-events: none;
       z-index: 1;
@@ -101,13 +152,13 @@
       left: 0;
       width: 6px;
       height: 6px;
-      background-color: #ffffff;
+      background-color: var(--cursor-dot);
       border-radius: 50%;
       pointer-events: none;
       z-index: 10000;
       transform: translate3d(-50%, -50%, 0);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.95);
-      transition: opacity 0.2s ease;
+      box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
+      transition: opacity 0.2s ease, background-color 0.3s ease;
       will-change: transform;
     }
 
@@ -118,73 +169,156 @@
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--cursor-border);
+      background: var(--cursor-bg);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      box-shadow: 
-        0 0 16px rgba(255, 255, 255, 0.12),
-        inset 0 0 10px rgba(255, 255, 255, 0.1);
       pointer-events: none;
       z-index: 9999;
       transform: translate3d(-50%, -50%, 0);
-      will-change: transform, width, height, border-color;
+      will-change: transform, width, height;
       transition: 
         width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
         height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.25s ease,
-        background-color 0.25s ease,
+        border-color 0.3s ease,
+        background-color 0.3s ease,
         opacity 0.2s ease;
     }
 
     .cursor-active #cursor-circle {
       width: 52px;
       height: 52px;
-      border-color: rgba(129, 140, 248, 0.75);
-      background: rgba(99, 102, 241, 0.14);
-      box-shadow: 
-        0 0 22px rgba(99, 102, 241, 0.4),
-        inset 0 0 12px rgba(99, 102, 241, 0.25);
+      border-color: rgba(14, 165, 233, 0.7);
+      background: rgba(20, 184, 166, 0.16);
+      box-shadow: 0 0 24px rgba(14, 165, 233, 0.35);
     }
 
-    /* Glass Navigation Dock */
+    /* Floating Navigation Glass */
     .glass-nav {
-      background: rgba(13, 18, 31, 0.82);
+      background: var(--glass-nav-bg);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-nav-border);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    html.dark .glass-nav {
       box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     /* Active Nav Item with Blurred Glow */
     .nav-active {
-      color: #ffffff !important;
-      background: rgba(99, 102, 241, 0.32) !important;
-      border: 1px solid rgba(129, 140, 248, 0.6) !important;
-      box-shadow: 0 0 18px rgba(99, 102, 241, 0.7), inset 0 0 8px rgba(99, 102, 241, 0.35) !important;
+      color: var(--active-nav-text) !important;
+      background: var(--active-nav-bg) !important;
+      border: 1px solid var(--active-nav-border) !important;
+      box-shadow: var(--active-nav-glow) !important;
       backdrop-filter: blur(8px);
     }
 
     /* Glowing Glass Cards */
     .glass-card {
-      background: rgba(13, 18, 31, 0.72);
+      background: var(--glass-card-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(99, 102, 241, 0.2);
-      box-shadow: 
-        0 8px 30px rgba(0, 0, 0, 0.55),
-        0 0 20px -3px rgba(99, 102, 241, 0.15);
+      border: 1px solid var(--glass-card-border);
+      box-shadow: var(--card-shadow);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
     }
     
     .glass-card:hover {
-      border-color: rgba(129, 140, 248, 0.8);
+      border-color: rgba(14, 165, 233, 0.7);
       transform: translateY(-5px);
-      box-shadow: 
-        0 20px 45px -10px rgba(0, 0, 0, 0.85),
-        0 0 35px 6px rgba(99, 102, 241, 0.5),
-        inset 0 0 25px rgba(99, 102, 241, 0.2);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    .inner-tile {
+      background-color: var(--tile-bg);
+      border: 1px solid var(--tile-border);
+      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .themed-badge {
+      background-color: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      color: var(--badge-text);
+    }
+
+    /* ================= SLEEK CHROMATIC AVATAR RING ================= */
+    .avatar-wrapper {
+      position: relative;
+      width: 136px;
+      height: 136px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Ambient chromatic aura */
+    .avatar-ambient-glow {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(6, 182, 212, 0.6),
+        rgba(217, 70, 239, 0.55),
+        rgba(245, 158, 11, 0.5),
+        rgba(14, 165, 233, 0.6),
+        rgba(6, 182, 212, 0.6)
+      );
+      filter: blur(10px);
+      opacity: 0.65;
+      animation: spin-ambient 8s linear infinite;
+      pointer-events: none;
+    }
+
+    /* Sleek slim rotating ribbon */
+    .avatar-ribbon-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 45deg,
+        #06b6d4 0%,
+        #38bdf8 25%,
+        #d946ef 55%,
+        #fbbf24 80%,
+        #06b6d4 100%
+      );
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), #fff calc(100% - 3px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), #fff calc(100% - 3px));
+      animation: spin-ribbon 5s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(14, 165, 233, 0.5));
+    }
+
+    /* Orbital Sparkle Embers */
+    .avatar-sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.95);
+      animation: pulse-sparkle 2.4s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .sparkle-1 { top: 12%; left: 82%; animation-delay: 0s; }
+    .sparkle-2 { bottom: 14%; left: 16%; animation-delay: 0.8s; }
+    .sparkle-3 { top: 22%; left: 18%; animation-delay: 1.6s; }
+
+    @keyframes spin-ribbon {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes spin-ambient {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes pulse-sparkle {
+      0% { opacity: 0.3; transform: scale(0.7); }
+      100% { opacity: 1; transform: scale(1.4); }
     }
 
     /* High-DPI Sharp Image Rendering */
@@ -200,12 +334,12 @@
       width: 48px;
       height: 48px;
       border-radius: 14px;
-      background: rgba(13, 18, 31, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--glass-card-bg);
+      border: 1px solid var(--glass-nav-border);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: #94a3b8;
+      color: var(--text-muted);
       font-size: 1.25rem;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
@@ -216,43 +350,63 @@
     }
 
     .social-icon-btn.btn-github:hover {
+      color: #0f172a;
+      border-color: rgba(15, 23, 42, 0.5);
+      box-shadow: 0 0 22px rgba(15, 23, 42, 0.25);
+    }
+    html.dark .social-icon-btn.btn-github:hover {
       color: #ffffff;
       border-color: rgba(255, 255, 255, 0.7);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.2);
-      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.45);
     }
 
     .social-icon-btn.btn-linkedin:hover {
-      color: #38bdf8;
-      border-color: rgba(56, 189, 248, 0.7);
-      box-shadow: 0 0 25px rgba(14, 165, 233, 0.55), inset 0 0 10px rgba(14, 165, 233, 0.25);
-      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.9));
+      color: #0284c7;
+      border-color: rgba(2, 132, 199, 0.7);
+      box-shadow: 0 0 25px rgba(2, 132, 199, 0.45);
     }
 
     .social-icon-btn.btn-discord:hover {
-      color: #818cf8;
-      border-color: rgba(129, 140, 248, 0.8);
-      box-shadow: 0 0 25px rgba(99, 102, 241, 0.6), inset 0 0 10px rgba(99, 102, 241, 0.3);
-      filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.9));
+      color: #6366f1;
+      border-color: rgba(99, 102, 241, 0.8);
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
     }
 
     .social-icon-btn.btn-mulearn:hover {
-      color: #fbbf24;
-      border-color: rgba(251, 191, 36, 0.8);
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6), inset 0 0 10px rgba(245, 158, 11, 0.3);
-      filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.9));
+      color: #d97706;
+      border-color: rgba(217, 119, 6, 0.8);
+      box-shadow: 0 0 25px rgba(217, 119, 6, 0.5);
     }
 
-    /* Monochrome Glowing AniList Icon */
+    /* Monochrome AniList Icon Glow */
     .social-icon-btn.btn-anilist:hover {
+      color: #0f172a;
+      border-color: rgba(15, 23, 42, 0.6);
+      box-shadow: 0 0 22px rgba(15, 23, 42, 0.25);
+    }
+    html.dark .social-icon-btn.btn-anilist:hover {
       color: #ffffff;
       border-color: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.55), inset 0 0 10px rgba(255, 255, 255, 0.25);
-      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.55);
+    }
+
+    /* Mobile Dropdown Animation */
+    #mobile-menu {
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #mobile-menu.menu-hidden {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.97);
+      pointer-events: none;
+    }
+    #mobile-menu.menu-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
     }
   </style>
 </head>
-<body class="selection:bg-indigo-500 selection:text-white pb-24 md:pb-0">
+<body class="selection:bg-teal-500 selection:text-white">
 
   <!-- ================= CANVAS BACKGROUND ANIMATION ================= -->
   <canvas id="bg-canvas"></canvas>
@@ -262,91 +416,126 @@
   <div id="cursor-dot"></div>
   <div id="cursor-circle"></div>
 
-  <!-- ================= DESKTOP FLOATING TOP NAV ================= -->
-  <header class="fixed top-5 inset-x-0 z-50 hidden md:flex justify-center px-4">
-    <nav class="glass-nav rounded-full px-5 py-2 w-full max-w-3xl flex items-center justify-between">
-      <div class="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-slate-400">
-        <a href="#hero" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Home</a>
-        <a href="#about" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">About</a>
-        <a href="#education" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Education</a>
-        <a href="#skills" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Skills</a>
-        <a href="#projects" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Projects</a>
-        <a href="#achievements" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Achievements</a>
+  <!-- ================= FLOATING NAVIGATION BAR ================= -->
+  <header class="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
+    <nav class="glass-nav rounded-full px-4 sm:px-5 py-2 w-full max-w-3xl flex items-center justify-between relative">
+      
+      <!-- Desktop Navigation Links -->
+      <div class="hidden md:flex items-center gap-1 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">
+        <a href="#hero" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-slate-900 dark:hover:text-white">Home</a>
+        <a href="#about" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-slate-900 dark:hover:text-white">About</a>
+        <a href="#education" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-slate-900 dark:hover:text-white">Education</a>
+        <a href="#skills" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-slate-900 dark:hover:text-white">Skills</a>
+        <a href="#projects" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-slate-900 dark:hover:text-white">Projects</a>
+        <a href="#achievements" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-slate-900 dark:hover:text-white">Achievements</a>
       </div>
-      <a href="#contact" class="px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-indigo-600/30">
-        Connect
-      </a>
+
+      <!-- Mobile Brand Label -->
+      <div class="md:hidden text-xs font-mono text-teal-600 dark:text-indigo-400 font-bold tracking-widest pl-2">
+        PORTFOLIO
+      </div>
+
+      <!-- Controls: Theme Toggle & Connect CTA -->
+      <div class="flex items-center gap-2">
+        <button 
+          id="theme-toggle" 
+          aria-label="Toggle Theme" 
+          class="w-8 h-8 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-sm"
+        >
+          <i id="theme-icon" class="fa-solid fa-moon"></i>
+        </button>
+
+        <a href="#contact" class="hidden sm:inline-flex px-4 py-1.5 rounded-full bg-gradient-to-r from-teal-600 to-sky-600 dark:from-indigo-600 dark:to-indigo-500 hover:opacity-90 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-sky-500/20">
+          Connect
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menu-btn" class="md:hidden text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white p-2 text-base transition-colors" aria-label="Toggle Menu">
+          <i id="menu-icon" class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="menu-hidden absolute top-14 inset-x-0 glass-nav rounded-3xl p-4 flex flex-col gap-1.5 shadow-2xl border border-slate-200 dark:border-slate-800 text-center text-sm font-medium md:hidden">
+        <a href="#hero" class="mobile-nav-link py-2.5 px-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-indigo-950/40 hover:text-teal-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center gap-2.5">
+          <i class="fa-solid fa-house text-xs opacity-70"></i> Home
+        </a>
+        <a href="#about" class="mobile-nav-link py-2.5 px-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-indigo-950/40 hover:text-teal-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center gap-2.5">
+          <i class="fa-solid fa-user text-xs opacity-70"></i> About
+        </a>
+        <a href="#education" class="mobile-nav-link py-2.5 px-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-indigo-950/40 hover:text-teal-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center gap-2.5">
+          <i class="fa-solid fa-graduation-cap text-xs opacity-70"></i> Education
+        </a>
+        <a href="#skills" class="mobile-nav-link py-2.5 px-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-indigo-950/40 hover:text-teal-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center gap-2.5">
+          <i class="fa-solid fa-code text-xs opacity-70"></i> Skills
+        </a>
+        <a href="#projects" class="mobile-nav-link py-2.5 px-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-indigo-950/40 hover:text-teal-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center gap-2.5">
+          <i class="fa-solid fa-folder-open text-xs opacity-70"></i> Projects
+        </a>
+        <a href="#achievements" class="mobile-nav-link py-2.5 px-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-teal-50 dark:hover:bg-indigo-950/40 hover:text-teal-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center gap-2.5">
+          <i class="fa-solid fa-trophy text-xs opacity-70"></i> Achievements
+        </a>
+        <a href="#contact" class="mobile-nav-link py-2.5 px-4 rounded-xl bg-gradient-to-r from-teal-600 to-sky-600 dark:from-indigo-600 dark:to-indigo-500 text-white font-semibold transition-all mt-1 flex items-center justify-center gap-2.5 shadow-md">
+          <i class="fa-solid fa-paper-plane text-xs"></i> Get in Touch
+        </a>
+      </div>
+
     </nav>
   </header>
 
-  <!-- ================= MOBILE BOTTOM FLOATING DOCK (ICONS ONLY) ================= -->
-  <nav class="fixed bottom-5 inset-x-0 z-50 flex justify-center px-4 md:hidden pointer-events-none">
-    <div class="glass-nav rounded-full px-3 py-2 flex items-center justify-between gap-1 max-w-xs w-full shadow-2xl pointer-events-auto border border-white/10">
-      <a href="#hero" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Home">
-        <i class="fa-solid fa-house"></i>
-      </a>
-      <a href="#about" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="About">
-        <i class="fa-solid fa-user"></i>
-      </a>
-      <a href="#education" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Education">
-        <i class="fa-solid fa-graduation-cap"></i>
-      </a>
-      <a href="#skills" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Skills">
-        <i class="fa-solid fa-code"></i>
-      </a>
-      <a href="#projects" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Projects">
-        <i class="fa-solid fa-folder-open"></i>
-      </a>
-      <a href="#achievements" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Achievements">
-        <i class="fa-solid fa-trophy"></i>
-      </a>
-      <a href="#contact" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Contact">
-        <i class="fa-solid fa-envelope"></i>
-      </a>
-    </div>
-  </nav>
-
   <!-- ================= HERO SECTION ================= -->
-  <section id="hero" class="min-h-screen relative flex items-center justify-center pt-24 sm:pt-32 pb-20 px-6 z-10">
+  <section id="hero" class="min-h-screen relative flex items-center justify-center pt-32 pb-20 px-6 z-10 scroll-mt-24">
     <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
       
-      <!-- Profile Picture Container -->
-      <div class="relative mb-6">
-        <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 shadow-2xl shadow-indigo-500/35">
-          <div class="w-full h-full rounded-full overflow-hidden bg-slate-900">
+      <!-- Sleek Swirling Chromatic Avatar Decor Frame -->
+      <div class="relative mb-7">
+        <div class="avatar-wrapper">
+          <!-- Ambient Chromatic Glow -->
+          <div class="avatar-ambient-glow"></div>
+          
+          <!-- Slim Animated Conic Ribbon -->
+          <div class="avatar-ribbon-ring"></div>
+          
+          <!-- Orbiting Micro Sparkles -->
+          <div class="avatar-sparkle sparkle-1"></div>
+          <div class="avatar-sparkle sparkle-2"></div>
+          <div class="avatar-sparkle sparkle-3"></div>
+
+          <!-- Profile Image -->
+          <div class="w-[124px] h-[124px] rounded-full overflow-hidden p-0.5 bg-slate-900 relative z-10 shadow-inner">
             <img 
               src="Profile.png" 
               alt="John Paul Shaji" 
-              class="w-full h-full object-cover object-center crisp-img transition-transform duration-300 hover:scale-105"
-              onerror="this.src='https://ui-avatars.com/api/?name=John+Paul+Shaji&background=4f46e5&color=fff&size=256'"
+              class="w-full h-full rounded-full object-cover object-center crisp-img transition-transform duration-500 hover:scale-105"
+              onerror="this.src='https://ui-avatars.com/api/?name=John+Paul+Shaji&background=0ea5e9&color=fff&size=256'"
             />
           </div>
         </div>
       </div>
 
       <!-- Tagline Badge -->
-      <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 text-xs font-mono mb-5 shadow-inner">
-        First-Year Computer Science Student
+      <div class="inline-flex items-center px-4 py-1.5 rounded-full themed-badge text-xs font-mono mb-5 shadow-inner">
+        First-Year Computer Science Student <!--[span_1](start_span)[span_1](end_span) -->
       </div>
 
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4">
-        Hi, I'm <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">John Paul Shaji</span>
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-4">
+        Hi, I'm <span class="bg-gradient-to-r from-teal-600 via-sky-600 to-teal-700 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">John Paul Shaji</span> <!--[span_2](start_span)[span_2](end_span) -->
       </h1>
 
-      <p class="text-sm font-mono text-indigo-400/90 mb-4 tracking-wide">
-        &lt;Insane_Alastor /&gt;
+      <p class="text-sm font-mono text-teal-700 dark:text-indigo-400/90 mb-4 tracking-wide font-medium">
+        &lt;Insane_Alastor /&gt; <!--[span_3](start_span)[span_3](end_span) -->
       </p>
 
-      <p class="text-base sm:text-lg text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed font-normal">
-        Computer Science Student | Building Cool Applications. Tinkering with code and exploring modern technology.
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed font-normal">
+        Computer Science Student | Building Cool Applications. Tinkering with code and exploring modern technology. <!--[span_4](start_span)[span_4](end_span) -->
       </p>
 
       <!-- Action Buttons -->
       <div class="flex flex-wrap justify-center items-center gap-4 mb-9">
-        <a href="#projects" class="px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+        <a href="#projects" class="px-6 py-3 rounded-full bg-gradient-to-r from-teal-600 to-sky-600 dark:from-indigo-600 dark:to-indigo-500 text-white text-sm font-semibold transition-all shadow-lg shadow-sky-500/20 hover:opacity-95 flex items-center gap-2">
           <i class="fa-solid fa-code text-xs"></i> View Projects
         </a>
-        <a href="#contact" class="px-6 py-3 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 text-sm font-semibold transition-all flex items-center gap-2">
+        <a href="#contact" class="px-6 py-3 rounded-full bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-sm font-semibold transition-all flex items-center gap-2 shadow-sm">
           <i class="fa-solid fa-paper-plane text-xs"></i> Contact Me
         </a>
       </div>
@@ -354,22 +543,24 @@
       <!-- Social Links with Glowing Hover Effects -->
       <div class="flex justify-center items-center gap-3 sm:gap-4">
         <a href="https://github.com/Insane-Alastor" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-icon-btn btn-github">
-          <i class="fa-brands fa-github"></i>
+          <i class="fa-brands fa-github"></i> <!--[span_5](start_span)[span_5](end_span) -->
         </a>
         <a href="https://www.linkedin.com/in/john-paul-shaji-b62284431" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="social-icon-btn btn-linkedin">
-          <i class="fa-brands fa-linkedin"></i>
+          <i class="fa-brands fa-linkedin"></i> <!--[span_6](start_span)[span_6](end_span) -->
         </a>
         <a href="https://discord.com/users/1245912407579295765" target="_blank" rel="noopener noreferrer" title="Discord" class="social-icon-btn btn-discord">
-          <i class="fa-brands fa-discord"></i>
+          <i class="fa-brands fa-discord"></i> <!--[span_7](start_span)[span_7](end_span) -->
         </a>
         <a href="https://app.mulearn.org/profile/johnpaulshaji@mulearn" target="_blank" rel="noopener noreferrer" title="MuLearn" class="social-icon-btn btn-mulearn">
-          <i class="fa-solid fa-graduation-cap"></i>
+          <i class="fa-solid fa-graduation-cap"></i> <!--[span_8](start_span)[span_8](end_span) -->
         </a>
-        <!-- Monochrome AniList Icon -->
+        
+        <!-- Authentic Monochrome AniList Monogram (A + L) -->
         <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" title="AniList" class="social-icon-btn btn-anilist">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-            <path d="M6.361 2.943 0 21.056h4.942l1.077-3.133H11.4l1.052 3.133h5.27L12.401 2.943H6.361zm2.498 4.508 2.012 5.922H7.078l1.78-5.922zM13.882 14.877l-1.996 6.179H24v-6.179h-10.118zm1.57-11.934v8.718h4.942V2.943h-4.942z"/>
-          </svg>
+          <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
+            <path class="fill-current" d="M6.36 2.94L0 21.06h4.94l1.08-3.13h5.38l1.05 3.13h5.27L12.4 2.94H6.36zm2.5 4.51l2.01 5.92H7.08l1.78-5.92z"/>
+            <path class="fill-current opacity-80" d="M15.45 2.94v8.72h4.94V2.94h-4.94zm-1.57 11.94l-2 6.18H24v-6.18h-10.12z"/>
+          </svg> <!--[span_9](start_span)[span_9](end_span) -->
         </a>
       </div>
 
@@ -377,27 +568,27 @@
   </section>
 
   <!-- ================= ABOUT SECTION ================= -->
-  <section id="about" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+  <section id="about" class="py-20 px-6 max-w-5xl mx-auto relative z-10 scroll-mt-24">
     <div class="flex items-center gap-3 mb-10">
-      <span class="text-indigo-400 font-mono text-sm font-semibold">01.</span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-white">About Me</h2>
-      <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+      <span class="text-teal-600 dark:text-indigo-400 font-mono text-sm font-semibold">01.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold">About Me</h2>
+      <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 ml-4"></div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="md:col-span-2 glass-card p-6 sm:p-8 rounded-3xl">
-        <p class="text-slate-300 leading-relaxed text-base sm:text-lg mb-6 font-normal">
-          I’m a first-year Computer Science student with a strong passion for tinkering with code and exploring new technology. I chose Computer Science to dive deep into the field, grow as a developer, and ultimately build tools that make a positive difference today and in the future.
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg mb-6 font-normal">
+          I’m a first-year Computer Science student with a strong passion for tinkering with code and exploring new technology. I chose Computer Science to dive deep into the field, grow as a developer, and ultimately build tools that make a positive difference today and in the future. <!--[span_10](start_span)[span_10](end_span) -->
         </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono text-slate-400">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
           <div class="flex items-center gap-2.5">
-            <div class="w-7 h-7 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+            <div class="w-7 h-7 rounded-lg bg-teal-500/10 flex items-center justify-center text-teal-600 dark:text-indigo-400">
               <i class="fa-solid fa-location-dot"></i>
             </div>
-            Ernakulam, Kerala, India
+            Ernakulam, Kerala, India <!--[span_11](start_span)[span_11](end_span) -->
           </div>
           <div class="flex items-center gap-2.5">
-            <div class="w-7 h-7 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+            <div class="w-7 h-7 rounded-lg bg-teal-500/10 flex items-center justify-center text-teal-600 dark:text-indigo-400">
               <i class="fa-solid fa-code-branch"></i>
             </div>
             Open for Collabs &amp; Projects
@@ -406,138 +597,154 @@
       </div>
 
       <div class="glass-card p-6 rounded-3xl flex flex-col justify-center items-center text-center">
-        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-2xl mb-4">
+        <div class="w-14 h-14 rounded-2xl bg-teal-500/10 border border-teal-500/20 dark:border-indigo-500/20 flex items-center justify-center text-teal-600 dark:text-indigo-400 text-2xl mb-4">
           <i class="fa-solid fa-terminal"></i>
         </div>
-        <h3 class="font-semibold text-white mb-1">Passionate Learner</h3>
-        <p class="text-xs text-slate-400">Tinkering with code, studying system design, and building modern apps.</p>
+        <h3 class="font-semibold mb-1">Passionate Learner</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Tinkering with code, studying system design, and building modern apps.</p>
       </div>
     </div>
   </section>
 
   <!-- ================= EDUCATION SECTION ================= -->
-  <section id="education" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+  <section id="education" class="py-20 px-6 max-w-5xl mx-auto relative z-10 scroll-mt-24">
     <div class="flex items-center gap-3 mb-10">
-      <span class="text-indigo-400 font-mono text-sm font-semibold">02.</span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-white">Education</h2>
-      <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+      <span class="text-teal-600 dark:text-indigo-400 font-mono text-sm font-semibold">02.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold">Education</h2>
+      <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 ml-4"></div>
     </div>
 
     <div class="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
         <div>
-          <h3 class="text-xl font-bold text-white">B.Tech in Computer Science Engineering</h3>
-          <a href="https://vjcet.org/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 text-sm hover:text-indigo-300 transition-colors flex items-center gap-1.5 mt-1 font-medium">
-            Viswajyothi College of Engineering and Technology (VJCET) <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          <h3 class="text-xl font-bold">B.Tech in Computer Science Engineering</h3> <!--[span_12](start_span)[span_12](end_span) -->
+          <a href="https://vjcet.org/" target="_blank" rel="noopener noreferrer" class="text-teal-600 dark:text-indigo-400 text-sm hover:text-sky-600 dark:hover:text-indigo-300 transition-colors flex items-center gap-1.5 mt-1 font-medium">
+            Viswajyothi College of Engineering and Technology (VJCET) <!--[span_13](start_span)[span_13](end_span) --> <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           </a>
         </div>
-        <span class="text-xs font-mono px-3 py-1 rounded-full bg-slate-800/80 text-indigo-300 border border-indigo-500/30">
-          2026 – 2030 Batch
+        <span class="text-xs font-mono px-3 py-1 rounded-full themed-badge">
+          2026 – 2030 Batch <!--[span_14](start_span)[span_14](end_span) -->
         </span>
       </div>
-      <p class="text-slate-400 text-sm leading-relaxed">
+      <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
         Building solid foundations in software engineering principles, algorithms, and database systems.
       </p>
-      <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-500">
-        <a href="https://maps.app.goo.gl/zLcvV6Gxde2zaJts8" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors flex items-center gap-1.5">
-          <i class="fa-solid fa-map-pin text-indigo-400"></i> Campus Location
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-500">
+        <a href="https://maps.app.goo.gl/zLcvV6Gxde2zaJts8" target="_blank" rel="noopener noreferrer" class="hover:text-slate-700 dark:hover:text-slate-300 transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-map-pin text-teal-600 dark:text-indigo-400"></i> Campus Location <!--[span_15](start_span)[span_15](end_span) -->
         </a>
-        <span>CGPA: Looking forward to it ;)</span>
+        <span>CGPA: Looking forward to it ;) <!--[span_16](start_span)[span_16](end_span) --></span>
       </div>
     </div>
   </section>
 
-  <!-- ================= SKILLS SECTION ================= -->
-  <section id="skills" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+  <!-- ================= MONOCHROME SKILLS & INTERESTS SECTION ================= -->
+  <section id="skills" class="py-20 px-6 max-w-5xl mx-auto relative z-10 scroll-mt-24">
     <div class="flex items-center gap-3 mb-10">
-      <span class="text-indigo-400 font-mono text-sm font-semibold">03.</span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-white">Skills &amp; Interests</h2>
-      <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+      <span class="text-teal-600 dark:text-indigo-400 font-mono text-sm font-semibold">03.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold">Skills &amp; Interests</h2>
+      <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 ml-4"></div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       
-      <!-- Tech Stack: Strictly Python, HTML, MySQL -->
+      <!-- Technical Stack: Monochrome Python, HTML, MySQL -->
       <div class="glass-card p-6 rounded-3xl">
-        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold block mb-4">Technical Stack</span>
+        <span class="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold block mb-4">Technical Stack</span>
         <div class="space-y-3">
-          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
-            <i class="devicon-python-plain colored text-2xl"></i>
+          
+          <div class="flex items-center gap-3.5 p-3 rounded-xl inner-tile text-slate-800 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600">
+            <div class="w-8 h-8 rounded-lg bg-slate-200/80 dark:bg-slate-800/80 flex items-center justify-center text-slate-700 dark:text-slate-300">
+              <i class="devicon-python-plain text-xl"></i>
+            </div>
             <div>
-              <h4 class="text-xs font-semibold text-white">Python</h4>
-              <p class="text-[11px] text-slate-400">Core Programming</p>
+              <h4 class="text-xs font-semibold">Python</h4> <!--[span_17](start_span)[span_17](end_span) -->
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Core Programming</p>
             </div>
           </div>
-          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
-            <i class="devicon-html5-plain colored text-2xl"></i>
+
+          <div class="flex items-center gap-3.5 p-3 rounded-xl inner-tile text-slate-800 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600">
+            <div class="w-8 h-8 rounded-lg bg-slate-200/80 dark:bg-slate-800/80 flex items-center justify-center text-slate-700 dark:text-slate-300">
+              <i class="devicon-html5-plain text-xl"></i>
+            </div>
             <div>
-              <h4 class="text-xs font-semibold text-white">HTML</h4>
-              <p class="text-[11px] text-slate-400">Frontend Structure</p>
+              <h4 class="text-xs font-semibold">HTML</h4> <!--[span_18](start_span)[span_18](end_span) -->
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Frontend Structure</p>
             </div>
           </div>
-          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
-            <i class="devicon-mysql-original colored text-2xl"></i>
+
+          <div class="flex items-center gap-3.5 p-3 rounded-xl inner-tile text-slate-800 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600">
+            <div class="w-8 h-8 rounded-lg bg-slate-200/80 dark:bg-slate-800/80 flex items-center justify-center text-slate-700 dark:text-slate-300">
+              <i class="devicon-mysql-plain text-xl"></i>
+            </div>
             <div>
-              <h4 class="text-xs font-semibold text-white">MySQL</h4>
-              <p class="text-[11px] text-slate-400">Relational Databases</p>
+              <h4 class="text-xs font-semibold">MySQL</h4> <!--[span_19](start_span)[span_19](end_span) -->
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Relational Databases</p>
             </div>
           </div>
+
         </div>
       </div>
 
-      <!-- Soft Skills -->
+      <!-- Soft Skills: Monochrome -->
       <div class="glass-card p-6 rounded-3xl">
-        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold block mb-4">Soft Skills</span>
+        <span class="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold block mb-4">Soft Skills</span>
         <div class="space-y-3">
-          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
-            <div class="w-8 h-8 rounded-lg bg-pink-500/10 text-pink-400 flex items-center justify-center text-sm">
+          
+          <div class="flex items-center gap-3.5 p-3 rounded-xl inner-tile text-slate-800 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600">
+            <div class="w-8 h-8 rounded-lg bg-slate-200/80 dark:bg-slate-800/80 flex items-center justify-center text-slate-700 dark:text-slate-300 text-sm">
               <i class="fa-solid fa-palette"></i>
             </div>
             <div>
-              <h4 class="text-xs font-semibold text-white">Sketching</h4>
-              <p class="text-[11px] text-slate-400">Visual thinker &amp; drawing</p>
+              <h4 class="text-xs font-semibold">Sketching</h4> <!--[span_20](start_span)[span_20](end_span) -->
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Visual thinker &amp; illustrator</p>
             </div>
           </div>
-          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
-            <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm">
+
+          <div class="flex items-center gap-3.5 p-3 rounded-xl inner-tile text-slate-800 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600">
+            <div class="w-8 h-8 rounded-lg bg-slate-200/80 dark:bg-slate-800/80 flex items-center justify-center text-slate-700 dark:text-slate-300 text-sm">
               <i class="fa-solid fa-microchip"></i>
             </div>
             <div>
-              <h4 class="text-xs font-semibold text-white">Tech Nerd</h4>
-              <p class="text-[11px] text-slate-400">Curious tech explorer</p>
+              <h4 class="text-xs font-semibold">Tech Nerd</h4> <!--[span_21](start_span)[span_21](end_span) -->
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Curious tech explorer</p>
             </div>
           </div>
+
         </div>
       </div>
 
-      <!-- Hobbies -->
+      <!-- Hobbies: Monochrome -->
       <div class="glass-card p-6 rounded-3xl">
-        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold block mb-4">Hobbies</span>
+        <span class="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold block mb-4">Hobbies</span>
         <div class="space-y-3">
-          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-slate-800/80">
-            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm">
+          
+          <div class="flex items-center gap-3.5 p-3 rounded-xl inner-tile text-slate-800 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600">
+            <div class="w-8 h-8 rounded-lg bg-slate-200/80 dark:bg-slate-800/80 flex items-center justify-center text-slate-700 dark:text-slate-300 text-sm">
               <i class="fa-solid fa-gamepad"></i>
             </div>
             <div>
-              <h4 class="text-xs font-semibold text-white">Gaming</h4>
-              <p class="text-[11px] text-slate-400">Tactical &amp; competitive</p>
+              <h4 class="text-xs font-semibold">Gaming</h4> <!--[span_22](start_span)[span_22](end_span) -->
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Tactical &amp; competitive</p>
             </div>
           </div>
-          <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-600 transition-colors group">
-            <div class="flex items-center gap-3">
-              <!-- Monochrome AniList Icon Badge -->
-              <div class="w-8 h-8 rounded-lg bg-white/10 text-slate-200 flex items-center justify-center text-sm">
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M6.361 2.943 0 21.056h4.942l1.077-3.133H11.4l1.052 3.133h5.27L12.401 2.943H6.361zm2.498 4.508 2.012 5.922H7.078l1.78-5.922zM13.882 14.877l-1.996 6.179H24v-6.179h-10.118zm1.57-11.934v8.718h4.942V2.943h-4.942z"/>
+
+          <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-xl inner-tile hover:border-slate-400 dark:hover:border-slate-600 transition-colors group">
+            <div class="flex items-center gap-3.5">
+              <div class="w-8 h-8 rounded-lg bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 flex items-center justify-center text-sm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
+                  <path class="fill-current" d="M6.36 2.94L0 21.06h4.94l1.08-3.13h5.38l1.05 3.13h5.27L12.4 2.94H6.36zm2.5 4.51l2.01 5.92H7.08l1.78-5.92z"/>
+                  <path class="fill-current opacity-75" d="M15.45 2.94v8.72h4.94V2.94h-4.94zm-1.57 11.94l-2 6.18H24v-6.18h-10.12z"/>
                 </svg>
               </div>
               <div>
-                <h4 class="text-xs font-semibold text-white group-hover:text-indigo-300 transition-colors">Watching Anime</h4>
-                <p class="text-[11px] text-slate-400 font-mono">AniList: InsaneAlastor</p>
+                <h4 class="text-xs font-semibold text-slate-800 dark:text-slate-200 group-hover:text-teal-600 dark:group-hover:text-indigo-400 transition-colors">Watching Anime</h4> <!--[span_23](start_span)[span_23](end_span) -->
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">AniList: InsaneAlastor</p> <!--[span_24](start_span)[span_24](end_span) -->
               </div>
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-white transition-colors mr-1"></i>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-teal-600 dark:group-hover:text-white transition-colors mr-1"></i>
           </a>
+
         </div>
       </div>
 
@@ -545,68 +752,68 @@
   </section>
 
   <!-- ================= PROJECTS SECTION ================= -->
-  <section id="projects" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+  <section id="projects" class="py-20 px-6 max-w-5xl mx-auto relative z-10 scroll-mt-24">
     <div class="flex items-center justify-between gap-3 mb-10">
       <div class="flex items-center gap-3 flex-1">
-        <span class="text-indigo-400 font-mono text-sm font-semibold">04.</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-white">Projects</h2>
-        <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+        <span class="text-teal-600 dark:text-indigo-400 font-mono text-sm font-semibold">04.</span>
+        <h2 class="text-2xl sm:text-3xl font-bold">Projects</h2>
+        <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 ml-4"></div>
       </div>
-      <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1.5">
-        GitHub Repositories <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-teal-600 dark:text-indigo-400 hover:text-sky-600 dark:hover:text-indigo-300 transition-colors flex items-center gap-1.5">
+        GitHub Repositories <!--[span_25](start_span)[span_25](end_span) --> <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
     </div>
 
     <!-- Dynamic Repositories Grid -->
     <div id="repos-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="glass-card p-6 rounded-3xl animate-pulse">
-        <div class="h-5 bg-slate-800 rounded w-1/2 mb-3"></div>
-        <div class="h-4 bg-slate-800 rounded w-3/4 mb-4"></div>
-        <div class="h-3 bg-slate-800 rounded w-1/4"></div>
+        <div class="h-5 bg-slate-200 dark:bg-slate-800 rounded w-1/2 mb-3"></div>
+        <div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-3/4 mb-4"></div>
+        <div class="h-3 bg-slate-200 dark:bg-slate-800 rounded w-1/4"></div>
       </div>
       <div class="glass-card p-6 rounded-3xl animate-pulse">
-        <div class="h-5 bg-slate-800 rounded w-1/2 mb-3"></div>
-        <div class="h-4 bg-slate-800 rounded w-3/4 mb-4"></div>
-        <div class="h-3 bg-slate-800 rounded w-1/4"></div>
+        <div class="h-5 bg-slate-200 dark:bg-slate-800 rounded w-1/2 mb-3"></div>
+        <div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-3/4 mb-4"></div>
+        <div class="h-3 bg-slate-200 dark:bg-slate-800 rounded w-1/4"></div>
       </div>
     </div>
   </section>
 
-  <!-- ================= ACHIEVEMENTS SECTION ================= -->
-  <section id="achievements" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+  <!-- ================= ACHIEVEMENTS SECTION (MONOCHROME BADGES) ================= -->
+  <section id="achievements" class="py-20 px-6 max-w-5xl mx-auto relative z-10 scroll-mt-24">
     <div class="flex items-center gap-3 mb-10">
-      <span class="text-indigo-400 font-mono text-sm font-semibold">05.</span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-white">Achievements &amp; Certifications</h2>
-      <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+      <span class="text-teal-600 dark:text-indigo-400 font-mono text-sm font-semibold">05.</span>
+      <h2 class="text-2xl sm:text-3xl font-bold">Achievements &amp; Certifications</h2>
+      <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 ml-4"></div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       
-      <!-- Achievement 1 -->
+      <!-- Achievement 1: Monochrome Trophy Icon Badge -->
       <div class="glass-card p-6 rounded-3xl flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xl flex-shrink-0">
+        <div class="w-12 h-12 rounded-2xl bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/80 flex items-center justify-center text-slate-700 dark:text-slate-300 text-xl flex-shrink-0 shadow-sm">
           <i class="fa-solid fa-trophy"></i>
         </div>
         <div>
-          <span class="text-xs font-mono text-amber-400 font-semibold uppercase tracking-wider">1st Place</span>
-          <h3 class="text-base sm:text-lg font-bold text-white mt-1">STHITHA PRAGYA Fest: Mission Decrypt</h3>
-          <p class="text-xs text-slate-400 mt-1">B.M.M English Medium Senior Secondary School</p>
-          <span class="text-xs text-slate-500 font-mono mt-2 block">27 September 2025</span>
+          <span class="text-xs font-mono text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">1st Place</span> <!--[span_26](start_span)[span_26](end_span) -->
+          <h3 class="text-base sm:text-lg font-bold mt-1">STHITHA PRAGYA Fest: Mission Decrypt</h3> <!--[span_27](start_span)[span_27](end_span) -->
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">B.M.M English Medium Senior Secondary School</p> <!--[span_28](start_span)[span_28](end_span) -->
+          <span class="text-xs text-slate-400 dark:text-slate-500 font-mono mt-2 block">27 September 2025</span> <!--[span_29](start_span)[span_29](end_span) -->
         </div>
       </div>
 
-      <!-- Certification 1: Python 3 -->
+      <!-- Certification 1: Python 3 Monochrome Award Badge -->
       <div class="glass-card p-6 rounded-3xl flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl flex-shrink-0">
-          <i class="fa-solid fa-certificate"></i>
+        <div class="w-12 h-12 rounded-2xl bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/80 flex items-center justify-center text-slate-700 dark:text-slate-300 text-xl flex-shrink-0 shadow-sm">
+          <i class="fa-solid fa-award"></i>
         </div>
         <div>
-          <span class="text-xs font-mono text-indigo-400 font-semibold uppercase tracking-wider">Certification</span>
-          <h3 class="text-base sm:text-lg font-bold text-white mt-1">Python 3</h3>
-          <p class="text-xs text-slate-400 mt-1">CodinGame</p>
+          <span class="text-xs font-mono text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">Certification</span> <!--[span_30](start_span)[span_30](end_span) -->
+          <h3 class="text-base sm:text-lg font-bold mt-1">Python 3</h3> <!--[span_31](start_span)[span_31](end_span) -->
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">CodinGame</p> <!--[span_32](start_span)[span_32](end_span) -->
           <div class="flex items-center justify-between gap-4 mt-3">
-            <span class="text-xs text-slate-500 font-mono">30 December 2025</span>
-            <a href="https://www.codingame.com/certification/5VTLPgGAD6Ypl9XX9r4JZw" target="_blank" rel="noopener noreferrer" class="text-xs text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1 font-mono font-medium">
+            <span class="text-xs text-slate-400 dark:text-slate-500 font-mono">30 December 2025</span> <!--[span_33](start_span)[span_33](end_span) -->
+            <a href="https://www.codingame.com/certification/5VTLPgGAD6Ypl9XX9r4JZw" target="_blank" rel="noopener noreferrer" class="text-xs text-teal-600 dark:text-indigo-400 hover:text-sky-600 dark:hover:text-indigo-300 transition-colors flex items-center gap-1 font-mono font-medium">
               Verify Credential <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
             </a>
           </div>
@@ -617,23 +824,23 @@
   </section>
 
   <!-- ================= CONTACT SECTION ================= -->
-  <section id="contact" class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10">
+  <section id="contact" class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10 scroll-mt-24">
     <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden">
-      <span class="text-indigo-400 font-mono text-xs uppercase tracking-widest font-semibold">06. What's Next?</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4">Let's Connect</h2>
-      <p class="text-slate-400 max-w-xl mx-auto mb-8 text-sm sm:text-base leading-relaxed">
+      <span class="text-teal-600 dark:text-indigo-400 font-mono text-xs uppercase tracking-widest font-semibold">06. What's Next?</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold mt-2 mb-4">Let's Connect</h2>
+      <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto mb-8 text-sm sm:text-base leading-relaxed">
         Whether you want to discuss technology, collaborate on software projects, or just talk anime &amp; code, feel free to drop a message!
       </p>
 
       <div class="flex flex-wrap justify-center gap-4 text-xs sm:text-sm font-mono mb-8">
-        <a href="mailto:johnpaulshaji@gmail.com" class="px-5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-all shadow-md shadow-indigo-600/30 flex items-center gap-2">
-          <i class="fa-solid fa-envelope"></i> johnpaulshaji@gmail.com
+        <a href="mailto:johnpaulshaji@gmail.com" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-600 to-sky-600 dark:from-indigo-600 dark:to-indigo-500 text-white font-medium transition-all shadow-md shadow-sky-500/20 flex items-center gap-2">
+          <i class="fa-solid fa-envelope"></i> johnpaulshaji@gmail.com <!--[span_34](start_span)[span_34](end_span) -->
         </a>
-        <a href="mailto:insanealastor1@gmail.com" class="px-5 py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all flex items-center gap-2">
-          <i class="fa-solid fa-at"></i> insanealastor1@gmail.com
+        <a href="mailto:insanealastor1@gmail.com" class="px-5 py-2.5 rounded-full bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all flex items-center gap-2 shadow-sm">
+          <i class="fa-solid fa-at"></i> insanealastor1@gmail.com <!--[span_35](start_span)[span_35](end_span) -->
         </a>
-        <a href="tel:+918075827421" class="px-5 py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all flex items-center gap-2">
-          <i class="fa-solid fa-phone"></i> +91 8075827421
+        <a href="tel:+918075827421" class="px-5 py-2.5 rounded-full bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all flex items-center gap-2 shadow-sm">
+          <i class="fa-solid fa-phone"></i> +91 8075827421 <!--[span_36](start_span)[span_36](end_span) -->
         </a>
       </div>
 
@@ -651,10 +858,10 @@
         <a href="https://app.mulearn.org/profile/johnpaulshaji@mulearn" target="_blank" rel="noopener noreferrer" title="MuLearn" class="social-icon-btn btn-mulearn">
           <i class="fa-solid fa-graduation-cap"></i>
         </a>
-        <!-- Monochrome AniList Icon -->
         <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" title="AniList" class="social-icon-btn btn-anilist">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-            <path d="M6.361 2.943 0 21.056h4.942l1.077-3.133H11.4l1.052 3.133h5.27L12.401 2.943H6.361zm2.498 4.508 2.012 5.922H7.078l1.78-5.922zM13.882 14.877l-1.996 6.179H24v-6.179h-10.118zm1.57-11.934v8.718h4.942V2.943h-4.942z"/>
+          <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
+            <path class="fill-current" d="M6.36 2.94L0 21.06h4.94l1.08-3.13h5.38l1.05 3.13h5.27L12.4 2.94H6.36zm2.5 4.51l2.01 5.92H7.08l1.78-5.92z"/>
+            <path class="fill-current opacity-80" d="M15.45 2.94v8.72h4.94V2.94h-4.94zm-1.57 11.94l-2 6.18H24v-6.18h-10.12z"/>
           </svg>
         </a>
       </div>
@@ -662,23 +869,85 @@
   </section>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="py-8 text-center text-xs font-mono text-slate-500 border-t border-slate-900 relative z-10 mb-16 md:mb-0">
-    <p>Crafted by John Paul Shaji &copy; <span id="current-year"></span></p>
+  <footer class="py-8 text-center text-xs font-mono text-slate-500 border-t border-slate-200 dark:border-slate-900 relative z-10">
+    <p>Crafted by John Paul Shaji &copy; <span id="current-year"></span></p> <!--[span_37](start_span)[span_37](end_span) -->
   </footer>
 
-  <!-- ================= JAVASCRIPT ================= -->
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
-    // 1. Set Current Year
+    // 1. Footer Year
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // 2. High-Performance White Dot + Glass Blur Circle Cursor (Desktop Only)
+    // 2. Light / Dark Theme Management
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        themeIcon.className = 'fa-solid fa-sun';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeIcon.className = 'fa-solid fa-moon';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'light') {
+      applyTheme(false);
+    } else if (savedTheme === 'dark') {
+      applyTheme(true);
+    } else {
+      applyTheme(prefersDark);
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(!isDark);
+    });
+
+    // 3. Mobile Navigation Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const menuIcon = document.getElementById('menu-icon');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function toggleMobileMenu(open) {
+      if (open) {
+        mobileMenu.classList.remove('menu-hidden');
+        mobileMenu.classList.add('menu-visible');
+        menuIcon.className = 'fa-solid fa-xmark';
+      } else {
+        mobileMenu.classList.remove('menu-visible');
+        mobileMenu.classList.add('menu-hidden');
+        menuIcon.className = 'fa-solid fa-bars';
+      }
+    }
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = mobileMenu.classList.contains('menu-visible');
+      toggleMobileMenu(!isOpen);
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => toggleMobileMenu(false));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        toggleMobileMenu(false);
+      }
+    });
+
+    // 4. White / Theme-Adaptive Center Dot + Glass Blur Circle Cursor
     const cursorDot = document.getElementById('cursor-dot');
     const cursorCircle = document.getElementById('cursor-circle');
 
-    let mouseX = -100;
-    let mouseY = -100;
-    let circleX = -100;
-    let circleY = -100;
+    let mouseX = -100, mouseY = -100;
+    let circleX = -100, circleY = -100;
 
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
@@ -702,33 +971,50 @@
     }
     requestAnimationFrame(animateCursor);
 
-    // Interactive Hover Elements Detection
-    const interactiveTargets = document.querySelectorAll('a, button, input');
-    interactiveTargets.forEach(el => {
+    document.querySelectorAll('a, button, input').forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
     });
 
-    // 3. Scroll-Spy Navigation Active Highlight with Blurred Glow (Both Desktop & Mobile)
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+    // 5. Scroll-Spy Navigation Active Highlight (Desktop & Mobile)
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const desktopLinks = document.querySelectorAll('.nav-link');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
     function updateActiveNavbar() {
-      let current = 'hero';
-      const scrollPosition = window.pageYOffset + 240;
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
 
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          current = section.getAttribute('id');
+      if (scrollY + windowHeight >= docHeight - 50) {
+        setActiveSection('contact');
+        return;
+      }
+
+      let currentSection = sections[0].id;
+      for (const section of sections) {
+        const top = section.offsetTop - 180;
+        if (scrollY >= top) {
+          currentSection = section.id;
+        }
+      }
+      setActiveSection(currentSection);
+    }
+
+    function setActiveSection(id) {
+      desktopLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('nav-active');
+        } else {
+          link.classList.remove('nav-active');
         }
       });
 
-      navLinks.forEach(link => {
-        link.classList.remove('nav-active');
-        if (link.getAttribute('href') === `#${current}`) {
+      mobileLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${id}`) {
           link.classList.add('nav-active');
+        } else {
+          link.classList.remove('nav-active');
         }
       });
     }
@@ -736,13 +1022,13 @@
     window.addEventListener('scroll', updateActiveNavbar, { passive: true });
     window.addEventListener('load', updateActiveNavbar);
 
-    // 4. Interactive Particle Constellation Background
+    // 6. Interactive Canvas Particle Constellation (Color-Aware)
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
 
     let width, height;
     let particles = [];
-    const particleCount = window.innerWidth < 768 ? 35 : 85;
+    const particleCount = window.innerWidth < 768 ? 32 : 80;
     const maxDistance = 115;
     const mouseRadius = 140;
 
@@ -762,7 +1048,7 @@
         this.size = Math.random() * 2 + 1;
         this.baseAlpha = Math.random() * 0.4 + 0.3;
         this.alpha = this.baseAlpha;
-        this.color = Math.random() > 0.4 ? '#818cf8' : '#a855f7';
+        this.type = Math.random() > 0.5 ? 'a' : 'b';
       }
 
       update() {
@@ -787,14 +1073,19 @@
         }
       }
 
-      draw() {
+      draw(isDark) {
         ctx.save();
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.alpha;
-        ctx.shadowColor = this.color;
-        ctx.shadowBlur = 8;
+
+        const color = isDark 
+          ? (this.type === 'a' ? '#818cf8' : '#a855f7')
+          : (this.type === 'a' ? '#14b8a6' : '#0ea5e9');
+
+        ctx.fillStyle = color;
+        ctx.globalAlpha = isDark ? this.alpha : this.alpha * 0.85;
+        ctx.shadowColor = color;
+        ctx.shadowBlur = isDark ? 8 : 4;
         ctx.fill();
         ctx.restore();
       }
@@ -806,6 +1097,7 @@
 
     function animateParticles() {
       ctx.clearRect(0, 0, width, height);
+      const isDark = document.documentElement.classList.contains('dark');
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -818,8 +1110,10 @@
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            const lineAlpha = (1 - dist / maxDistance) * 0.2;
-            ctx.strokeStyle = `rgba(99, 102, 241, ${lineAlpha})`;
+            const lineAlpha = (1 - dist / maxDistance) * (isDark ? 0.2 : 0.15);
+            ctx.strokeStyle = isDark 
+              ? `rgba(99, 102, 241, ${lineAlpha})` 
+              : `rgba(20, 184, 166, ${lineAlpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
             ctx.restore();
@@ -829,14 +1123,14 @@
 
       particles.forEach(p => {
         p.update();
-        p.draw();
+        p.draw(isDark);
       });
 
       requestAnimationFrame(animateParticles);
     }
     requestAnimationFrame(animateParticles);
 
-    // 5. Dynamic GitHub Repositories Fetch
+    // 7. Dynamic GitHub Repositories Fetch
     async function fetchGitHubRepos() {
       const username = 'Insane-Alastor';
       const container = document.getElementById('repos-grid');
@@ -847,7 +1141,7 @@
         const repos = await res.json();
 
         if (repos.length === 0) {
-          container.innerHTML = `<div class="col-span-2 text-center text-slate-400 py-8">No public repositories found.</div>`;
+          container.innerHTML = `<div class="col-span-2 text-center text-slate-500 py-8">No public repositories found.</div>`;
           return;
         }
 
@@ -855,29 +1149,29 @@
           <div class="glass-card p-6 rounded-3xl flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <i class="fa-regular fa-folder-closed text-indigo-400 text-2xl"></i>
-                <div class="flex items-center gap-3 text-slate-400">
-                  <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" title="View Source">
+                <i class="fa-regular fa-folder-closed text-teal-600 dark:text-indigo-400 text-2xl"></i>
+                <div class="flex items-center gap-3 text-slate-500 dark:text-slate-400">
+                  <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 dark:hover:text-white transition-colors" title="View Source">
                     <i class="fa-brands fa-github text-lg"></i>
                   </a>
                   ${repo.homepage ? `
-                    <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" title="Live Preview">
+                    <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 dark:hover:text-white transition-colors" title="Live Preview">
                       <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
                     </a>
                   ` : ''}
                 </div>
               </div>
-              <h3 class="text-base sm:text-lg font-bold text-white hover:text-indigo-400 transition-colors">
+              <h3 class="text-base sm:text-lg font-bold hover:text-teal-600 dark:hover:text-indigo-400 transition-colors">
                 <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
               </h3>
-              <p class="text-slate-400 text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed font-normal">
+              <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed font-normal">
                 ${repo.description || 'A software project crafted with code.'}
               </p>
             </div>
             
-            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mt-6 pt-4 border-t border-slate-800">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800">
               <span class="flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-teal-500 dark:bg-indigo-500"></span>
                 ${repo.language || 'Code'}
               </span>
               <span class="flex items-center gap-1">
@@ -891,13 +1185,13 @@
         container.innerHTML = `
           <div class="glass-card p-6 rounded-3xl col-span-2">
             <div class="flex items-center justify-between mb-3">
-              <i class="fa-regular fa-folder-closed text-indigo-400 text-2xl"></i>
-              <a href="https://github.com/Insane-Alastor" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
+              <i class="fa-regular fa-folder-closed text-teal-600 dark:text-indigo-400 text-2xl"></i>
+              <a href="https://github.com/Insane-Alastor" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"><i class="fa-brands fa-github text-lg"></i></a>
             </div>
-            <h3 class="text-base sm:text-lg font-bold text-white">Explore My GitHub Repositories</h3>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">Check out all source code, experiments, and ongoing projects directly on GitHub.</p>
+            <h3 class="text-base sm:text-lg font-bold">Explore My GitHub Repositories</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">Check out all source code, experiments, and ongoing projects directly on GitHub.</p>
             <div class="mt-4">
-              <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-indigo-400 hover:text-indigo-300 transition-colors">View All Repositories &rarr;</a>
+              <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-teal-600 dark:text-indigo-400 hover:text-sky-600 dark:hover:text-indigo-300 transition-colors">View All Repositories &rarr;</a>
             </div>
           </div>
         `;
