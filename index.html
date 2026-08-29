@@ -19,7 +19,7 @@
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script>
@@ -55,7 +55,35 @@
       position: relative;
     }
 
-    /* Hide OS Cursor on Desktop */
+    /* Globally disable all link underlines */
+    a, a:hover, a:focus, a:active {
+      text-decoration: none !important;
+    }
+
+    /* Ambient Cyber-Grid Background */
+    .bg-grid-pattern {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 55px 55px;
+      pointer-events: none;
+      z-index: 1;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+    }
+
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* Desktop Custom Mouse Cursor */
     @media (pointer: fine) {
       body, a, button, input {
         cursor: none !important;
@@ -67,7 +95,6 @@
       }
     }
 
-    /* White Center Dot */
     #cursor-dot {
       position: fixed;
       top: 0;
@@ -84,7 +111,6 @@
       will-change: transform;
     }
 
-    /* Glass Blur Follower Circle */
     #cursor-circle {
       position: fixed;
       top: 0;
@@ -111,55 +137,31 @@
         opacity 0.2s ease;
     }
 
-    /* Cursor Hover State */
     .cursor-active #cursor-circle {
-      width: 54px;
-      height: 54px;
-      border-color: rgba(129, 140, 248, 0.7);
-      background: rgba(99, 102, 241, 0.12);
+      width: 52px;
+      height: 52px;
+      border-color: rgba(129, 140, 248, 0.75);
+      background: rgba(99, 102, 241, 0.14);
       box-shadow: 
-        0 0 22px rgba(99, 102, 241, 0.35),
-        inset 0 0 12px rgba(99, 102, 241, 0.2);
+        0 0 22px rgba(99, 102, 241, 0.4),
+        inset 0 0 12px rgba(99, 102, 241, 0.25);
     }
 
-    /* Ambient Cyber-Grid Background */
-    .bg-grid-pattern {
-      position: fixed;
-      inset: 0;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-      background-size: 55px 55px;
-      pointer-events: none;
-      z-index: 1;
-      mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
-      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
-    }
-
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      width: 100vw;
-      height: 100vh;
-    }
-
-    /* Floating Navigation Bar */
+    /* Glass Navigation Dock */
     .glass-nav {
-      background: rgba(13, 18, 31, 0.78);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(13, 18, 31, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Active Nav Link Blurred Glow */
+    /* Active Nav Item with Blurred Glow */
     .nav-active {
       color: #ffffff !important;
-      background: rgba(99, 102, 241, 0.28) !important;
-      border: 1px solid rgba(129, 140, 248, 0.55) !important;
-      box-shadow: 0 0 16px rgba(99, 102, 241, 0.65), inset 0 0 8px rgba(99, 102, 241, 0.35) !important;
+      background: rgba(99, 102, 241, 0.32) !important;
+      border: 1px solid rgba(129, 140, 248, 0.6) !important;
+      box-shadow: 0 0 18px rgba(99, 102, 241, 0.7), inset 0 0 8px rgba(99, 102, 241, 0.35) !important;
       backdrop-filter: blur(8px);
     }
 
@@ -193,7 +195,7 @@
       transform: translateZ(0);
     }
 
-    /* ================= SOCIAL ICONS HOVER GLOW ================= */
+    /* Social Icons Base & Hover Glow */
     .social-icon-btn {
       width: 48px;
       height: 48px;
@@ -241,15 +243,16 @@
       filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.9));
     }
 
+    /* Monochrome Glowing AniList Icon */
     .social-icon-btn.btn-anilist:hover {
-      color: #02a9ff;
-      border-color: rgba(2, 169, 255, 0.8);
-      box-shadow: 0 0 25px rgba(2, 169, 255, 0.6), inset 0 0 10px rgba(2, 169, 255, 0.3);
-      filter: drop-shadow(0 0 8px rgba(2, 169, 255, 0.9));
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.55), inset 0 0 10px rgba(255, 255, 255, 0.25);
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
     }
   </style>
 </head>
-<body class="selection:bg-indigo-500 selection:text-white">
+<body class="selection:bg-indigo-500 selection:text-white pb-24 md:pb-0">
 
   <!-- ================= CANVAS BACKGROUND ANIMATION ================= -->
   <canvas id="bg-canvas"></canvas>
@@ -259,12 +262,10 @@
   <div id="cursor-dot"></div>
   <div id="cursor-circle"></div>
 
-  <!-- ================= FLOATING NAVIGATION BAR ================= -->
-  <header class="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
+  <!-- ================= DESKTOP FLOATING TOP NAV ================= -->
+  <header class="fixed top-5 inset-x-0 z-50 hidden md:flex justify-center px-4">
     <nav class="glass-nav rounded-full px-5 py-2 w-full max-w-3xl flex items-center justify-between">
-      
-      <!-- Desktop Navigation Links -->
-      <div class="hidden md:flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-slate-400">
+      <div class="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-slate-400">
         <a href="#hero" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Home</a>
         <a href="#about" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">About</a>
         <a href="#education" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Education</a>
@@ -272,42 +273,44 @@
         <a href="#projects" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Projects</a>
         <a href="#achievements" class="nav-link px-3.5 py-1.5 rounded-full transition-all duration-300 hover:text-white">Achievements</a>
       </div>
-
-      <!-- Mobile Label -->
-      <div class="md:hidden text-xs font-mono text-indigo-400 font-semibold tracking-wider">
-        PORTFOLIO
-      </div>
-
-      <!-- Action Button & Mobile Toggle -->
-      <div class="flex items-center gap-2">
-        <a href="#contact" class="hidden sm:inline-flex px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-indigo-600/30">
-          Connect
-        </a>
-        <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white p-2 text-base" aria-label="Toggle Menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
+      <a href="#contact" class="px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-indigo-600/30">
+        Connect
+      </a>
     </nav>
   </header>
 
-  <!-- Mobile Dropdown Menu -->
-  <div id="mobile-menu" class="fixed top-20 inset-x-4 z-40 hidden md:hidden">
-    <div class="glass-nav rounded-2xl p-5 flex flex-col gap-3 text-center text-sm font-medium text-slate-200 shadow-2xl border border-slate-800">
-      <a href="#hero" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Home</a>
-      <a href="#about" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">About</a>
-      <a href="#education" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Education</a>
-      <a href="#skills" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Skills</a>
-      <a href="#projects" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Projects</a>
-      <a href="#achievements" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg transition-colors">Achievements</a>
-      <a href="#contact" class="mobile-nav-link hover:text-indigo-400 py-1.5 rounded-lg font-semibold text-indigo-400">Get in Touch</a>
+  <!-- ================= MOBILE BOTTOM FLOATING DOCK (ICONS ONLY) ================= -->
+  <nav class="fixed bottom-5 inset-x-0 z-50 flex justify-center px-4 md:hidden pointer-events-none">
+    <div class="glass-nav rounded-full px-3 py-2 flex items-center justify-between gap-1 max-w-xs w-full shadow-2xl pointer-events-auto border border-white/10">
+      <a href="#hero" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Home">
+        <i class="fa-solid fa-house"></i>
+      </a>
+      <a href="#about" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="About">
+        <i class="fa-solid fa-user"></i>
+      </a>
+      <a href="#education" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Education">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </a>
+      <a href="#skills" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Skills">
+        <i class="fa-solid fa-code"></i>
+      </a>
+      <a href="#projects" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Projects">
+        <i class="fa-solid fa-folder-open"></i>
+      </a>
+      <a href="#achievements" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Achievements">
+        <i class="fa-solid fa-trophy"></i>
+      </a>
+      <a href="#contact" class="nav-link w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm" aria-label="Contact">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
     </div>
-  </div>
+  </nav>
 
   <!-- ================= HERO SECTION ================= -->
-  <section id="hero" class="min-h-screen relative flex items-center justify-center pt-32 pb-20 px-6 z-10">
+  <section id="hero" class="min-h-screen relative flex items-center justify-center pt-24 sm:pt-32 pb-20 px-6 z-10">
     <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
       
-      <!-- Crisp Profile Container -->
+      <!-- Profile Picture Container -->
       <div class="relative mb-6">
         <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 shadow-2xl shadow-indigo-500/35">
           <div class="w-full h-full rounded-full overflow-hidden bg-slate-900">
@@ -349,7 +352,7 @@
       </div>
 
       <!-- Social Links with Glowing Hover Effects -->
-      <div class="flex justify-center items-center gap-4">
+      <div class="flex justify-center items-center gap-3 sm:gap-4">
         <a href="https://github.com/Insane-Alastor" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-icon-btn btn-github">
           <i class="fa-brands fa-github"></i>
         </a>
@@ -362,8 +365,11 @@
         <a href="https://app.mulearn.org/profile/johnpaulshaji@mulearn" target="_blank" rel="noopener noreferrer" title="MuLearn" class="social-icon-btn btn-mulearn">
           <i class="fa-solid fa-graduation-cap"></i>
         </a>
+        <!-- Monochrome AniList Icon -->
         <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" title="AniList" class="social-icon-btn btn-anilist">
-          <i class="fa-solid fa-tv"></i>
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M6.361 2.943 0 21.056h4.942l1.077-3.133H11.4l1.052 3.133h5.27L12.401 2.943H6.361zm2.498 4.508 2.012 5.922H7.078l1.78-5.922zM13.882 14.877l-1.996 6.179H24v-6.179h-10.118zm1.57-11.934v8.718h4.942V2.943h-4.942z"/>
+          </svg>
         </a>
       </div>
 
@@ -421,7 +427,7 @@
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
         <div>
           <h3 class="text-xl font-bold text-white">B.Tech in Computer Science Engineering</h3>
-          <a href="https://vjcet.org/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 text-sm hover:underline flex items-center gap-1.5 mt-1 font-medium">
+          <a href="https://vjcet.org/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 text-sm hover:text-indigo-300 transition-colors flex items-center gap-1.5 mt-1 font-medium">
             Viswajyothi College of Engineering and Technology (VJCET) <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           </a>
         </div>
@@ -517,17 +523,20 @@
               <p class="text-[11px] text-slate-400">Tactical &amp; competitive</p>
             </div>
           </div>
-          <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/30 hover:border-indigo-400/50 transition-colors group">
+          <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-600 transition-colors group">
             <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm">
-                <i class="fa-solid fa-tv"></i>
+              <!-- Monochrome AniList Icon Badge -->
+              <div class="w-8 h-8 rounded-lg bg-white/10 text-slate-200 flex items-center justify-center text-sm">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M6.361 2.943 0 21.056h4.942l1.077-3.133H11.4l1.052 3.133h5.27L12.401 2.943H6.361zm2.498 4.508 2.012 5.922H7.078l1.78-5.922zM13.882 14.877l-1.996 6.179H24v-6.179h-10.118zm1.57-11.934v8.718h4.942V2.943h-4.942z"/>
+                </svg>
               </div>
               <div>
-                <h4 class="text-xs font-semibold text-white group-hover:text-indigo-300">Watching Anime</h4>
+                <h4 class="text-xs font-semibold text-white group-hover:text-indigo-300 transition-colors">Watching Anime</h4>
                 <p class="text-[11px] text-slate-400 font-mono">AniList: InsaneAlastor</p>
               </div>
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-indigo-400 group-hover:translate-x-0.5 transition-transform mr-1"></i>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-white transition-colors mr-1"></i>
           </a>
         </div>
       </div>
@@ -543,7 +552,7 @@
         <h2 class="text-2xl sm:text-3xl font-bold text-white">Projects</h2>
         <div class="h-px bg-slate-800 flex-1 ml-4"></div>
       </div>
-      <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-indigo-400 hover:underline flex items-center gap-1.5">
+      <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1.5">
         GitHub Repositories <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
     </div>
@@ -586,18 +595,18 @@
         </div>
       </div>
 
-      <!-- Certification 1 -->
+      <!-- Certification 1: Python 3 -->
       <div class="glass-card p-6 rounded-3xl flex items-start gap-4">
         <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl flex-shrink-0">
           <i class="fa-solid fa-certificate"></i>
         </div>
         <div>
           <span class="text-xs font-mono text-indigo-400 font-semibold uppercase tracking-wider">Certification</span>
-          <h3 class="text-base sm:text-lg font-bold text-white mt-1">Python 3 Programming Languages</h3>
+          <h3 class="text-base sm:text-lg font-bold text-white mt-1">Python 3</h3>
           <p class="text-xs text-slate-400 mt-1">CodinGame</p>
           <div class="flex items-center justify-between gap-4 mt-3">
             <span class="text-xs text-slate-500 font-mono">30 December 2025</span>
-            <a href="https://www.codingame.com/certification/5VTLPgGAD6Ypl9XX9r4JZw" target="_blank" rel="noopener noreferrer" class="text-xs text-indigo-400 hover:underline flex items-center gap-1 font-mono font-medium">
+            <a href="https://www.codingame.com/certification/5VTLPgGAD6Ypl9XX9r4JZw" target="_blank" rel="noopener noreferrer" class="text-xs text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1 font-mono font-medium">
               Verify Credential <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
             </a>
           </div>
@@ -629,7 +638,7 @@
       </div>
 
       <!-- Contact Social Links with Glowing Hover Effects -->
-      <div class="flex justify-center items-center gap-4">
+      <div class="flex justify-center items-center gap-3 sm:gap-4">
         <a href="https://github.com/Insane-Alastor" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-icon-btn btn-github">
           <i class="fa-brands fa-github"></i>
         </a>
@@ -642,15 +651,18 @@
         <a href="https://app.mulearn.org/profile/johnpaulshaji@mulearn" target="_blank" rel="noopener noreferrer" title="MuLearn" class="social-icon-btn btn-mulearn">
           <i class="fa-solid fa-graduation-cap"></i>
         </a>
+        <!-- Monochrome AniList Icon -->
         <a href="https://anilist.co/user/InsaneAlastor" target="_blank" rel="noopener noreferrer" title="AniList" class="social-icon-btn btn-anilist">
-          <i class="fa-solid fa-tv"></i>
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M6.361 2.943 0 21.056h4.942l1.077-3.133H11.4l1.052 3.133h5.27L12.401 2.943H6.361zm2.498 4.508 2.012 5.922H7.078l1.78-5.922zM13.882 14.877l-1.996 6.179H24v-6.179h-10.118zm1.57-11.934v8.718h4.942V2.943h-4.942z"/>
+          </svg>
         </a>
       </div>
     </div>
   </section>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="py-8 text-center text-xs font-mono text-slate-500 border-t border-slate-900 relative z-10">
+  <footer class="py-8 text-center text-xs font-mono text-slate-500 border-t border-slate-900 relative z-10 mb-16 md:mb-0">
     <p>Crafted by John Paul Shaji &copy; <span id="current-year"></span></p>
   </footer>
 
@@ -659,17 +671,7 @@
     // 1. Set Current Year
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // 2. Mobile Menu Toggle
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-    });
-
-    // 3. High-Performance White Dot + Glass Blur Circle Cursor
+    // 2. High-Performance White Dot + Glass Blur Circle Cursor (Desktop Only)
     const cursorDot = document.getElementById('cursor-dot');
     const cursorCircle = document.getElementById('cursor-circle');
 
@@ -682,10 +684,7 @@
       mouseX = e.clientX;
       mouseY = e.clientY;
 
-      // Direct, zero-lag position update for the white center dot
       cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-      
-      // Make visible when cursor enters viewport
       cursorDot.style.opacity = '1';
       cursorCircle.style.opacity = '1';
     }, { passive: true });
@@ -695,7 +694,6 @@
       cursorCircle.style.opacity = '0';
     });
 
-    // Snappy, smooth lerp physics for the surrounding glass-blur circle
     function animateCursor() {
       circleX += (mouseX - circleX) * 0.22;
       circleY += (mouseY - circleY) * 0.22;
@@ -704,14 +702,14 @@
     }
     requestAnimationFrame(animateCursor);
 
-    // Interactive Element Detection
+    // Interactive Hover Elements Detection
     const interactiveTargets = document.querySelectorAll('a, button, input');
     interactiveTargets.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
     });
 
-    // 4. Scroll-Spy Navigation Active Highlight with Blurred Glow
+    // 3. Scroll-Spy Navigation Active Highlight with Blurred Glow (Both Desktop & Mobile)
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
 
@@ -738,14 +736,14 @@
     window.addEventListener('scroll', updateActiveNavbar, { passive: true });
     window.addEventListener('load', updateActiveNavbar);
 
-    // 5. Interactive Particle Constellation Background
+    // 4. Interactive Particle Constellation Background
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
 
     let width, height;
     let particles = [];
-    const particleCount = window.innerWidth < 768 ? 40 : 85;
-    const maxDistance = 120;
+    const particleCount = window.innerWidth < 768 ? 35 : 85;
+    const maxDistance = 115;
     const mouseRadius = 140;
 
     function resizeCanvas() {
@@ -820,7 +818,7 @@
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            const lineAlpha = (1 - dist / maxDistance) * 0.22;
+            const lineAlpha = (1 - dist / maxDistance) * 0.2;
             ctx.strokeStyle = `rgba(99, 102, 241, ${lineAlpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
@@ -838,7 +836,7 @@
     }
     requestAnimationFrame(animateParticles);
 
-    // 6. Dynamic GitHub Repositories Fetch
+    // 5. Dynamic GitHub Repositories Fetch
     async function fetchGitHubRepos() {
       const username = 'Insane-Alastor';
       const container = document.getElementById('repos-grid');
@@ -899,7 +897,7 @@
             <h3 class="text-base sm:text-lg font-bold text-white">Explore My GitHub Repositories</h3>
             <p class="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">Check out all source code, experiments, and ongoing projects directly on GitHub.</p>
             <div class="mt-4">
-              <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-indigo-400 hover:underline">View All Repositories &rarr;</a>
+              <a href="https://github.com/Insane-Alastor?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-indigo-400 hover:text-indigo-300 transition-colors">View All Repositories &rarr;</a>
             </div>
           </div>
         `;
