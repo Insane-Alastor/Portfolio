@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>John Paul Shaji | Portfolio</title>
 
-  <!-- Immediate Theme Initializer (Syncs with Browser/OS Theme without Flash) -->
+  <!-- Immediate Theme Initializer -->
   <script>
     (function() {
       const savedTheme = localStorage.getItem('theme');
@@ -103,7 +103,6 @@
       --text-muted: #94a3b8;
       --grid-line: rgba(255, 255, 255, 0.025);
 
-      /* Navbar Gradient (Dark) */
       --glass-nav-bg: linear-gradient(135deg, rgba(18, 24, 41, 0.92) 0%, rgba(11, 15, 26, 0.9) 50%, rgba(25, 20, 42, 0.92) 100%);
       --glass-nav-border: rgba(129, 140, 248, 0.2);
 
@@ -134,7 +133,7 @@
       --badge-text: #a5b4fc;
     }
 
-    /* Instant Touch Responses */
+    /* Hardware Accelerated Scrolling & Instant Touch Responses */
     html, body {
       overscroll-behavior-y: none;
       -webkit-overflow-scrolling: touch;
@@ -147,7 +146,16 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
       position: relative;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Global transition sweep for clean theme switches */
+    .glass-nav, .glass-card, .inner-tile, .social-icon-btn, .themed-badge {
+      transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     a, button, input {
@@ -195,7 +203,7 @@
       transform: translateZ(0);
     }
 
-    /* Desktop Custom Mouse Cursor */
+    /* Desktop Custom Mouse Cursor (Disabled on Mobile) */
     @media (pointer: fine) {
       body, a, button, input {
         cursor: none !important;
@@ -219,7 +227,7 @@
       z-index: 10000;
       transform: translate3d(-50%, -50%, 0);
       box-shadow: 0 0 6px rgba(14, 165, 233, 0.6);
-      transition: opacity 0.15s ease, background-color 0.2s ease;
+      transition: opacity 0.15s ease, background-color 0.3s ease;
       will-change: transform;
     }
 
@@ -239,8 +247,8 @@
       transition:
         width 0.18s cubic-bezier(0.16, 1, 0.3, 1),
         height 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.2s ease,
-        background-color 0.2s ease,
+        border-color 0.3s ease,
+        background-color 0.3s ease,
         opacity 0.15s ease;
     }
 
@@ -255,18 +263,17 @@
     /* Floating Navigation Shell with Subtle Gradient */
     .glass-nav {
       background: var(--glass-nav-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--glass-nav-border);
       box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
-      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     html.dark .glass-nav {
       box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.75), 0 0 16px -2px rgba(99, 102, 241, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
-    /* Desktop Navigation Links: Driven strictly by synchronized engine */
+    /* Navigation Links */
     .nav-link {
       color: var(--nav-link-color);
       border: 1px solid transparent;
@@ -278,8 +285,9 @@
       transition: color 120ms ease, background-color 120ms ease, border-color 120ms ease;
     }
 
+    .nav-link:hover,
     .nav-link.is-hovered,
-    .nav-link:focus-visible {
+    .nav-link:active {
       color: var(--nav-link-hover-color);
       background-color: var(--nav-link-hover-bg);
     }
@@ -292,7 +300,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     }
 
-    /* Luminous Glowing Connect Button: Driven strictly by synchronized engine */
+    /* Luminous Glowing Connect Button */
     .btn-connect {
       background: var(--btn-connect-bg);
       box-shadow: var(--btn-connect-shadow);
@@ -309,27 +317,29 @@
       position: relative;
     }
 
+    .btn-connect:hover,
     .btn-connect.is-hovered,
-    .btn-connect:focus-visible {
+    .btn-connect:active {
       background: var(--btn-connect-hover-bg);
       box-shadow: var(--btn-connect-hover-shadow);
       transform: translateY(-1px);
       filter: brightness(1.08);
     }
 
-    /* Interactive Cards: Managed via .is-hovered to eliminate stuck browser hovers */
+    /* Interactive Cards with Full Touch/Hover Glow */
     .glass-card {
       background: var(--glass-card-bg);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border: 1px solid var(--glass-card-border);
       box-shadow: var(--card-shadow);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
       position: relative;
     }
 
+    .glass-card:hover,
     .glass-card.is-hovered,
-    .glass-card:focus-within {
+    .glass-card:active {
       border-color: rgba(14, 165, 233, 0.7);
       transform: translateY(-4px);
       box-shadow: var(--card-hover-shadow);
@@ -341,7 +351,9 @@
       transition: background-color 0.2s ease, border-color 0.2s ease;
     }
 
-    .inner-tile.is-hovered {
+    .inner-tile:hover,
+    .inner-tile.is-hovered,
+    .inner-tile:active {
       border-color: rgba(14, 165, 233, 0.5);
     }
 
@@ -508,7 +520,7 @@
       transform: translateZ(0);
     }
 
-    /* Social Icons: Managed via .is-hovered to eliminate stuck browser hovers */
+    /* Social Icons with Mobile Tap/Active Support */
     .social-icon-btn {
       width: 48px;
       height: 48px;
@@ -524,60 +536,68 @@
       position: relative;
     }
 
+    .social-icon-btn:hover,
     .social-icon-btn.is-hovered,
-    .social-icon-btn:focus-visible {
+    .social-icon-btn:active {
       transform: translateY(-4px) scale(1.08);
     }
 
+    .social-icon-btn.btn-github:hover,
     .social-icon-btn.btn-github.is-hovered,
-    .social-icon-btn.btn-github:focus-visible {
+    .social-icon-btn.btn-github:active {
       color: #0f172a;
       border-color: rgba(15, 23, 42, 0.5);
       box-shadow: 0 0 20px rgba(15, 23, 42, 0.2);
     }
+    html.dark .social-icon-btn.btn-github:hover,
     html.dark .social-icon-btn.btn-github.is-hovered,
-    html.dark .social-icon-btn.btn-github:focus-visible {
+    html.dark .social-icon-btn.btn-github:active {
       color: #ffffff;
       border-color: rgba(255, 255, 255, 0.7);
       box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
     }
 
+    .social-icon-btn.btn-linkedin:hover,
     .social-icon-btn.btn-linkedin.is-hovered,
-    .social-icon-btn.btn-linkedin:focus-visible {
+    .social-icon-btn.btn-linkedin:active {
       color: #0284c7;
       border-color: rgba(2, 132, 199, 0.7);
       box-shadow: 0 0 22px rgba(2, 132, 199, 0.4);
     }
 
+    .social-icon-btn.btn-discord:hover,
     .social-icon-btn.btn-discord.is-hovered,
-    .social-icon-btn.btn-discord:focus-visible {
+    .social-icon-btn.btn-discord:active {
       color: #6366f1;
       border-color: rgba(99, 102, 241, 0.8);
       box-shadow: 0 0 22px rgba(99, 102, 241, 0.45);
     }
 
+    .social-icon-btn.btn-mulearn:hover,
     .social-icon-btn.btn-mulearn.is-hovered,
-    .social-icon-btn.btn-mulearn:focus-visible {
+    .social-icon-btn.btn-mulearn:active {
       color: #d97706;
       border-color: rgba(217, 119, 6, 0.8);
       box-shadow: 0 0 22px rgba(217, 119, 6, 0.45);
     }
 
+    .social-icon-btn.btn-anilist:hover,
     .social-icon-btn.btn-anilist.is-hovered,
-    .social-icon-btn.btn-anilist:focus-visible {
+    .social-icon-btn.btn-anilist:active {
       color: #0f172a;
       border-color: rgba(15, 23, 42, 0.6);
       box-shadow: 0 0 20px rgba(15, 23, 42, 0.2);
     }
+    html.dark .social-icon-btn.btn-anilist:hover,
     html.dark .social-icon-btn.btn-anilist.is-hovered,
-    html.dark .social-icon-btn.btn-anilist:focus-visible {
+    html.dark .social-icon-btn.btn-anilist:active {
       color: #ffffff;
       border-color: rgba(255, 255, 255, 0.85);
       box-shadow: 0 0 22px rgba(255, 255, 255, 0.5);
     }
 
     #mobile-menu {
-      transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #mobile-menu.menu-hidden {
       opacity: 0;
@@ -604,51 +624,57 @@
   <div id="cursor-circle"></div>
 
   <!-- ================= FLOATING NAVIGATION BAR WITH GRADIENT ================= -->
-  <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
-    <nav class="glass-nav rounded-full px-2.5 py-1.5 flex items-center justify-between gap-1 sm:gap-2 relative shadow-lg">
+  <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-3 sm:px-4">
+    <nav class="glass-nav rounded-full px-3 sm:px-4 py-2 w-full max-w-2xl flex items-center justify-between relative shadow-lg">
 
       <!-- Desktop Navigation Sequence -->
-      <div class="hidden md:flex items-center gap-1">
-        <a href="#hero" class="nav-link nav-active">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#education" class="nav-link">Education</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#achievements" class="nav-link">Achievements</a>
+      <div class="hidden md:flex items-center justify-between w-full">
+        <div class="flex items-center gap-1">
+          <a href="#hero" class="nav-link nav-active">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#education" class="nav-link">Education</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#achievements" class="nav-link">Achievements</a>
+        </div>
 
-        <!-- Day / Night Theme Toggle Button -->
-        <button
-          id="theme-toggle"
-          aria-label="Toggle Theme"
-          class="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-sm ml-1"
-        >
-          <i id="theme-icon" class="fa-solid fa-moon"></i>
-        </button>
+        <div class="flex items-center gap-2">
+          <!-- Day / Night Theme Toggle Button -->
+          <button
+            id="theme-toggle"
+            aria-label="Toggle Theme"
+            class="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-sm"
+          >
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+          </button>
 
-        <!-- Lighter Luminous Blurred Glowing Connect Button -->
-        <a href="#contact" class="btn-connect ml-1.5">
-          Connect
-        </a>
+          <!-- Lighter Luminous Blurred Glowing Connect Button -->
+          <a href="#contact" class="btn-connect">
+            Connect
+          </a>
+        </div>
       </div>
 
-      <!-- Mobile Brand Label -->
-      <div class="md:hidden text-xs font-mono text-teal-600 dark:text-indigo-400 font-bold tracking-widest pl-3 py-1">
-        PORTFOLIO
-      </div>
+      <!-- Mobile Top Row -->
+      <div class="flex md:hidden items-center justify-between w-full px-1">
+        <div class="text-xs font-mono text-teal-600 dark:text-indigo-400 font-bold tracking-widest">
+          PORTFOLIO
+        </div>
 
-      <!-- Mobile Right Controls: Theme Toggle & Hamburger -->
-      <div class="flex items-center gap-1.5 md:hidden">
-        <button
-          id="theme-toggle-mobile"
-          aria-label="Toggle Theme"
-          class="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-sm"
-        >
-          <i id="theme-icon-mobile" class="fa-solid fa-moon"></i>
-        </button>
+        <!-- Mobile Right Controls: Theme Toggle & Hamburger -->
+        <div class="flex items-center gap-1.5">
+          <button
+            id="theme-toggle-mobile"
+            aria-label="Toggle Theme"
+            class="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-sm"
+          >
+            <i id="theme-icon-mobile" class="fa-solid fa-moon"></i>
+          </button>
 
-        <button id="menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white p-2 text-base transition-colors" aria-label="Toggle Menu">
-          <i id="menu-icon" class="fa-solid fa-bars"></i>
-        </button>
+          <button id="menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white p-2 text-base transition-colors" aria-label="Toggle Menu">
+            <i id="menu-icon" class="fa-solid fa-bars"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Mobile Dropdown Menu -->
@@ -686,10 +712,16 @@
       <!-- Seamless Discord Rhythm / Wave Avatar Decor Frame -->
       <div class="relative mb-8">
         <div class="dc-rhythm-container">
+          <!-- Audio-Beat Ambient Pulsing Glow -->
           <div class="dc-rhythm-ambient"></div>
+
+          <!-- Primary Morphing Wave (Directly Flushed to Avatar Rim) -->
           <div class="dc-rhythm-wave-1"></div>
+
+          <!-- Secondary Wave (Dynamic Undulation) -->
           <div class="dc-rhythm-wave-2"></div>
 
+          <!-- Micro Sparkles -->
           <div class="dc-sparkle dc-sp-1"></div>
           <div class="dc-sparkle dc-sp-2"></div>
           <div class="dc-sparkle dc-sp-3"></div>
@@ -1137,21 +1169,21 @@
       }
     });
 
-    // 4. Cursor Engine with Dynamic Active-Set Tracking
+    // 4. Desktop Cursor Engine & Hover State Synchronizer
     const cursorDot = document.getElementById('cursor-dot');
     const cursorCircle = document.getElementById('cursor-circle');
+    const isDesktopPointer = window.matchMedia('(pointer: fine)').matches;
 
     let mouseX = -100, mouseY = -100;
     let circleX = -100, circleY = -100;
     let activeHoveredElements = new Set();
 
-    // Synchronized hover detector (fires on both mousemove AND scroll frame)
     function updatePointerHover() {
-      if (mouseX < 0 || mouseY < 0) {
+      if (!isDesktopPointer || mouseX < 0 || mouseY < 0) {
         if (activeHoveredElements.size > 0) {
           activeHoveredElements.forEach(el => el.classList.remove('is-hovered'));
           activeHoveredElements.clear();
-          cursorCircle.classList.remove('cursor-active');
+          if (cursorCircle) cursorCircle.classList.remove('cursor-active');
         }
         return;
       }
@@ -1162,7 +1194,6 @@
       if (target) {
         const interactive = target.closest('a, button, input, .social-icon-btn, .inner-tile, .nav-link, .btn-connect');
         const card = target.closest('.glass-card');
-
         if (interactive) newHovered.add(interactive);
         if (card) newHovered.add(card);
       }
@@ -1181,43 +1212,46 @@
         }
       });
 
-      // Expand or contract cursor ring
-      if (newHovered.size > 0) {
-        cursorCircle.classList.add('cursor-active');
-      } else {
-        cursorCircle.classList.remove('cursor-active');
+      if (cursorCircle) {
+        if (newHovered.size > 0) {
+          cursorCircle.classList.add('cursor-active');
+        } else {
+          cursorCircle.classList.remove('cursor-active');
+        }
       }
 
       activeHoveredElements = newHovered;
     }
 
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+    if (isDesktopPointer) {
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
 
-      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-      cursorDot.style.opacity = '1';
-      cursorCircle.style.opacity = '1';
-      updatePointerHover();
-    }, { passive: true });
+        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        cursorDot.style.opacity = '1';
+        cursorCircle.style.opacity = '1';
+        updatePointerHover();
+      }, { passive: true });
 
-    document.addEventListener('mouseleave', () => {
-      cursorDot.style.opacity = '0';
-      cursorCircle.style.opacity = '0';
-      mouseX = -100;
-      mouseY = -100;
-      updatePointerHover();
-    });
+      document.addEventListener('mouseleave', () => {
+        cursorDot.style.opacity = '0';
+        cursorCircle.style.opacity = '0';
+        mouseX = -100;
+        mouseY = -100;
+        updatePointerHover();
+      });
 
-    function animateCursor() {
-      circleX += (mouseX - circleX) * 0.38;
-      circleY += (mouseY - circleY) * 0.38;
-      cursorCircle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0) translate(-50%, -50%)`;
+      function animateCursor() {
+        circleX += (mouseX - circleX) * 0.38;
+        circleY += (mouseY - circleY) * 0.38;
+        cursorCircle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(animateCursor);
+      }
       requestAnimationFrame(animateCursor);
     }
-    requestAnimationFrame(animateCursor);
 
-    // 5. Scroll-Spy Navigation & Scroll-Hover Re-evaluator
+    // 5. Scroll-Spy Navigation & Fail-Safe Scroll-Hover Update
     const sections = Array.from(document.querySelectorAll('section[id]'));
     const desktopLinks = document.querySelectorAll('.nav-link');
     const mobileLinks = document.querySelectorAll('.mobile-nav-link');
@@ -1230,12 +1264,11 @@
       const windowHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
 
-      // Transfer hover glow to whatever element is currently passing under the stationary cursor
+      // Transfer hover glow to whatever element is passing under the desktop cursor
       updatePointerHover();
 
       if (scrollY + windowHeight >= docHeight - 60) {
         applyActiveSection('contact');
-        scrollTicking = false;
         return;
       }
 
@@ -1246,7 +1279,6 @@
         }
       }
       applyActiveSection(activeSectionId);
-      scrollTicking = false;
     }
 
     function applyActiveSection(id) {
@@ -1264,7 +1296,13 @@
 
     window.addEventListener('scroll', () => {
       if (!scrollTicking) {
-        requestAnimationFrame(onScrollUpdate);
+        requestAnimationFrame(() => {
+          try {
+            onScrollUpdate();
+          } finally {
+            scrollTicking = false;
+          }
+        });
         scrollTicking = true;
       }
     }, { passive: true });
