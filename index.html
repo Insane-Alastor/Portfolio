@@ -65,6 +65,7 @@
       --text-muted: #475569;
       --grid-line: rgba(14, 165, 233, 0.05);
 
+      /* Navbar Gradient (Light) */
       --glass-nav-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 250, 0.92) 50%, rgba(238, 248, 255, 0.95) 100%);
       --glass-nav-border: rgba(14, 165, 233, 0.22);
 
@@ -133,7 +134,7 @@
       --badge-text: #a5b4fc;
     }
 
-    /* Instant Touch Responses & Silky Smooth Global Theme Transitions */
+    /* Instant Touch Responses */
     html, body {
       overscroll-behavior-y: none;
       -webkit-overflow-scrolling: touch;
@@ -146,16 +147,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
       position: relative;
-      transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Global transition sweep for cards, tiles, and navigation shells */
-    .glass-nav, .glass-card, .inner-tile, .social-icon-btn, .themed-badge {
-      transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     a, button, input {
@@ -191,7 +183,6 @@
       mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
       -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
       transform: translateZ(0);
-      transition: background-image 0.4s ease;
     }
 
     #bg-canvas {
@@ -228,7 +219,7 @@
       z-index: 10000;
       transform: translate3d(-50%, -50%, 0);
       box-shadow: 0 0 6px rgba(14, 165, 233, 0.6);
-      transition: opacity 0.15s ease, background-color 0.4s ease;
+      transition: opacity 0.15s ease, background-color 0.2s ease;
       will-change: transform;
     }
 
@@ -248,8 +239,8 @@
       transition:
         width 0.18s cubic-bezier(0.16, 1, 0.3, 1),
         height 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.4s ease,
-        background-color 0.4s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease,
         opacity 0.15s ease;
     }
 
@@ -261,7 +252,21 @@
       box-shadow: 0 0 14px rgba(14, 165, 233, 0.3);
     }
 
-    /* Desktop Navigation Links */
+    /* Floating Navigation Shell with Subtle Gradient */
+    .glass-nav {
+      background: var(--glass-nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-nav-border);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    html.dark .glass-nav {
+      box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.75), 0 0 16px -2px rgba(99, 102, 241, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    /* Desktop Navigation Links: Driven strictly by synchronized engine */
     .nav-link {
       color: var(--nav-link-color);
       border: 1px solid transparent;
@@ -287,7 +292,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     }
 
-    /* Luminous Glowing Connect Button */
+    /* Luminous Glowing Connect Button: Driven strictly by synchronized engine */
     .btn-connect {
       background: var(--btn-connect-bg);
       box-shadow: var(--btn-connect-shadow);
@@ -312,13 +317,14 @@
       filter: brightness(1.08);
     }
 
+    /* Interactive Cards: Managed via .is-hovered to eliminate stuck browser hovers */
     .glass-card {
       background: var(--glass-card-bg);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border: 1px solid var(--glass-card-border);
       box-shadow: var(--card-shadow);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, background 0.4s ease;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
       position: relative;
     }
 
@@ -332,6 +338,7 @@
     .inner-tile {
       background-color: var(--tile-bg);
       border: 1px solid var(--tile-border);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
 
     .inner-tile.is-hovered {
@@ -501,7 +508,7 @@
       transform: translateZ(0);
     }
 
-    /* Social Icons */
+    /* Social Icons: Managed via .is-hovered to eliminate stuck browser hovers */
     .social-icon-btn {
       width: 48px;
       height: 48px;
@@ -1138,6 +1145,7 @@
     let circleX = -100, circleY = -100;
     let activeHoveredElements = new Set();
 
+    // Synchronized hover detector (fires on both mousemove AND scroll frame)
     function updatePointerHover() {
       if (mouseX < 0 || mouseY < 0) {
         if (activeHoveredElements.size > 0) {
@@ -1159,18 +1167,21 @@
         if (card) newHovered.add(card);
       }
 
+      // Immediately un-glow elements no longer under cursor
       activeHoveredElements.forEach(el => {
         if (!newHovered.has(el)) {
           el.classList.remove('is-hovered');
         }
       });
 
+      // Immediately glow newly entered elements
       newHovered.forEach(el => {
         if (!activeHoveredElements.has(el)) {
           el.classList.add('is-hovered');
         }
       });
 
+      // Expand or contract cursor ring
       if (newHovered.size > 0) {
         cursorCircle.classList.add('cursor-active');
       } else {
@@ -1219,6 +1230,7 @@
       const windowHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
 
+      // Transfer hover glow to whatever element is currently passing under the stationary cursor
       updatePointerHover();
 
       if (scrollY + windowHeight >= docHeight - 60) {
@@ -1245,7 +1257,9 @@
         link.classList.toggle('nav-active', link.getAttribute('href') === `#${id}`);
       });
 
-      mobileLinks.classList.toggle('nav-active', link.getAttribute('href') === `#${id}`);
+      mobileLinks.forEach(link => {
+        link.classList.toggle('nav-active', link.getAttribute('href') === `#${id}`);
+      });
     }
 
     window.addEventListener('scroll', () => {
