@@ -805,11 +805,17 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px;
+  padding: 14px 16px;
   background: rgba(0, 0, 0, .2);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   font-size: .78rem;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.about-quick:hover {
+  border-color: var(--clr-caramel);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(224, 160, 80, .14);
 }
 .quick-row {
   display: flex;
